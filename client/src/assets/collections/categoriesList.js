@@ -1,12 +1,12 @@
 // Liste der Produktkategorien in Section Categories.jsx (Kategorien)
 
-import vegetable_image from "./vegetables_image.png";
-import fruits_image from "./fruits_image.png";
-import bottles_image from "./bottles_image.png";
-import instant_food_image from "./instant_food.png";
-import dairy_product_image from "./dairy_product_image.png";
-import bakery_image from "./bakery_image.png";
-import grain_image from "./grain_image.png";
+import vegetable_image from "../vegetables_image.png";
+import fruits_image from "../fruits_image.png";
+import bottles_image from "../bottles_image.png";
+import instant_food_image from "../instant_food.png";
+import dairy_product_image from "../dairy_product_image.png";
+import bakery_image from "../bakery_image.png";
+import grain_image from "../grain_image.png";
 
 
 export const categories = [

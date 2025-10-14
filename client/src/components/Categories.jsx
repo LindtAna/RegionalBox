@@ -1,4 +1,4 @@
-import { categories } from '../assets/categoriesList'
+import { categories } from '../assets/collections/categoriesList'
 import { useAppContext } from '../context/AppContext'
 
 const Categories = () => {
