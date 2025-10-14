@@ -22,16 +22,16 @@ const Hero = () => {
                 md:text-left max-w-72 md:max-w-80 lg:max-w-140 leading-tight lg:leading-15 '>Kostenloser Versand beim ersten Einkauf ab 39 €.</h2>
 
                 <div className='flex flex-col md:flex-row items-center md:mt-5 font-medium '>
-                    <Link to={'/products'} className='text-sm md:text-lg flex items-center gap-2 px-7 md:px-9 
+                    <Link to={'/products'} className='group text-sm md:text-lg flex items-center gap-2 px-7 md:px-9 
 py-3 bg-primary hover:bg-dark-green transition rounded my-5
 text-white cursor-pointer'>
                         Jetzt einkaufen
                         <img className='md:hidden transition group-focus:translate-x-1' src={assets.white_arrow_icon} alt='' />
                     </Link>
                     <Link to={'/products'}
-                        className='text-sm md:text-lg flex items-center gap-2 px-7 py-3 cursor-pointer'>
+                        className='group text-sm md:text-lg flex items-center gap-2 px-7 py-3 cursor-pointer'>
                         Angebote anschauen
-                        <img className='transition group-hover:translate-x-1' src={assets.black_arrow_icon} alt='' />
+                        <img className='group transition group-hover:translate-x-1' src={assets.black_arrow_icon} alt='' />
                     </Link>
                 </div>
             </div>
