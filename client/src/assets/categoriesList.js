@@ -1,4 +1,4 @@
-
+// Liste der Produktkategorien in Section Categories.jsx (Kategorien)
 
 import vegetable_image from "./vegetables_image.png";
 import fruits_image from "./fruits_image.png";
