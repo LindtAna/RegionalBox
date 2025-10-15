@@ -5,6 +5,7 @@ import arrow_right_icon_colored from "./arrow_right_icon_colored.svg";
 import star_icon from "./star_icon.svg";
 import star_dull_icon from "./star_dull_icon.svg";
 import cart_icon from "./cart_icon.svg";
+import cart_icon_s from "./cart_icon_s.svg";
 import nav_cart_icon from "./nav_cart_icon.svg";
 import add_icon from "./add_icon.svg";
 import refresh_icon from "./refresh_icon.svg";
@@ -25,10 +26,6 @@ import main_banner_bg_sm from "./main_banner_bg_sm.png";
 import bottom_banner_image from "./bottom_banner_image.png";
 import bottom_banner_image_sm from "./bottom_banner_image_sm.png";
 import add_address_iamge from "./add_address_image.svg";
-import potato_image_1 from "./potato_image_1.png";
-import potato_image_2 from "./potato_image_2.png";
-import potato_image_3 from "./potato_image_3.png";
-import potato_image_4 from "./potato_image_4.png";
 import tomato_image from "./tomato_image.png";
 import carrot_image from "./carrot_image.png";
 import apple_image from "./apple_image.png";
@@ -63,6 +60,7 @@ import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
 import instant_food_image from "./instant_food.png";
+import blaubeersaft_image from "./blaubeersaft_image.png";
 
 export const assets = {
   logo,
@@ -72,6 +70,7 @@ export const assets = {
   star_icon,
   star_dull_icon,
   cart_icon,
+  cart_icon_s,
   nav_cart_icon,
   add_icon,
   refresh_icon,
@@ -92,6 +91,7 @@ export const assets = {
   bottom_banner_image_sm,
   add_address_iamge,
   box_icon,
+  blaubeersaft_image,
 };
 
 
@@ -153,12 +153,13 @@ export const features = [
 export const dummyProducts = [
   // Vegetables
   {
-    _id: "gd46g23h",
-    name: "Potato 500g",
-    category: "Vegetables",
-    price: 25,
-    offerPrice: 20,
-    image: [potato_image_1, potato_image_2, potato_image_3, potato_image_4],
+    _id: "1234qwert",
+    name: "Waldheidelbeersaft",
+    category: "Alkoholfreie Getränke",
+    volume: "0,7L",
+    price: 7.99,
+    offerPrice: 5.99,
+    image: [blaubeersaft_image],
     description: [
       "Fresh and organic",
       "Rich in carbohydrates",
