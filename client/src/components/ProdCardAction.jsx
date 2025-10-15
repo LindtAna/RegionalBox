@@ -22,9 +22,9 @@ const ProdCardAction = ({actionProduct}) => {
                 </div>
                 <div className="flex items-end justify-between mt-3">
                     <p className="md:text-xl text-base font-medium text-green-500">
-                      {currency}€{actionProduct.offerPrice}{' '}<span className="text-gray-500/60 md:text-sm 
+                      {currency}{actionProduct.offerPrice}{' '}<span className="text-gray-500/60 md:text-sm 
                       text-xs line-through">
-                        {currency}€{actionProduct.price}</span>
+                        {currency}{actionProduct.price}</span> 
                     </p>
                     <div  onClick={(e) => {e.stopPropagation()}} className="text-dark-green">
                         {!actionCardItems[actionProduct._id] ? (

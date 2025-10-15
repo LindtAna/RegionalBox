@@ -1,4 +1,5 @@
-import React from 'react'
+// Section Angebote Der Woche
+
 import ProdCardAction from './ProdCardAction'
 import { useAppContext } from '../context/AppContext';
 
