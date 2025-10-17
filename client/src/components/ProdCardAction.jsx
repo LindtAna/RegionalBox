@@ -1,4 +1,4 @@
-// // Karte eines rabattierten Produkts. Abhängigkeit: angeboteList.js
+//Karte eines rabattierten Produkts. Abhängigkeit: angeboteList.js
 
 import { assets } from '../assets/assets';
 import { useAppContext } from '../context/AppContext';
@@ -8,8 +8,8 @@ const ProdCardAction = ({actionProduct}) => {
     const {currency, addToCart, removeFromCart, actionCardItems, navigate} = useAppContext()
 
     return actionProduct && (
-        <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2
-         bg-white min-w-56 max-w-56 w-full">
+        <div className="border border-dark-green/20 rounded-md md:px-4 px-3 py-2
+         bg-white max-w-56 w-full">
             <div className="group cursor-pointer flex items-center justify-center px-2">
                 <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" 
                 src={actionProduct.image[0]} alt={actionProduct.name} />
@@ -32,8 +32,7 @@ const ProdCardAction = ({actionProduct}) => {
                             border border-emerald-200 md:w-[80px]
                             w-[64px] h-[34px] rounded cursor-pointer"
                             onClick={() => addToCart(actionProduct._id)} >
-                              <img src={assets.cart_icon_s}/>
-                                Add
+                              <img src={assets.cart_icon_s}/>  <img src={assets.plus_icon}/>
                             </button>
                         ) : (
                             <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-primary/25 

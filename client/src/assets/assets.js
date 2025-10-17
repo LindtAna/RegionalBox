@@ -21,6 +21,7 @@ import box_icon from "./box_icon.svg";
 import trust_icon from "./trust_icon.svg";
 import black_arrow_icon from "./black_arrow_icon.svg";
 import white_arrow_icon from "./white_arrow_icon.svg";
+import plus_icon from "./plus_icon.svg";
 import main_banner_bg from "./main_banner_bg.png";
 import main_banner_bg_sm from "./main_banner_bg_sm.png";
 import bottom_banner_image from "./bottom_banner_image.png";
@@ -62,6 +63,7 @@ import barley_image from "./barley_image.png";
 import instant_food_image from "./instant_food.png";
 import blaubeersaft_image from "./blaubeersaft_image.png";
 
+
 export const assets = {
   logo,
   search_icon,
@@ -92,6 +94,7 @@ export const assets = {
   add_address_iamge,
   box_icon,
   blaubeersaft_image,
+  plus_icon,
 };
 
 

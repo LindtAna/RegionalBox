@@ -1,4 +1,6 @@
 // Liste der Produktkategorien in Section Categories.jsx (Kategorien)
+//der Inhalt der Karten und die Hintergrundfarbe
+//Der Rahmen(border) der Karten → Categories.jsx
 
 import vegetable_image from "../vegetables_image.png";
 import fruits_image from "../fruits_image.png";
@@ -14,42 +16,43 @@ export const categories = [
     text: "Gemüse",
     path: "Vegetables",
     image: vegetable_image,
-    bgColor: "#FEF6DA",
+    bgColor: "#ACDF87"
   },
   {
     text: "Obst",
     path: "Fruits",
     image: fruits_image,
-    bgColor: "#FEE0E0",
+    bgColor: "#adf55d"
   },
   {
     text: "Alkoholfreie Getränke",
     path: "Drinks",
     image: bottles_image,
-    bgColor: "#F0F5DE",
+    bgColor: "#42D911"
   },
   {
     text: "Instantgerichte",
     path: "Instant",
     image: instant_food_image,
-    bgColor: "#E1F5EC",
+    bgColor: "#76BA1B"
   },
   {
     text: "Kühlregal",
     path: "Dairy",
     image: dairy_product_image,
-    bgColor: "#FEE6CD",
+    bgColor: "#68BB59"
   },
   {
     text: "Brot & Gebäck",
     path: "Bakery",
     image: bakery_image,
-    bgColor: "#E0F6FE",
+    bgColor: "#4C9A2A"
   },
   {
     text: "Cerealien & Getreide",
     path: "Grains",
     image: grain_image,
-    bgColor: "#F1E3F9",
+    bgColor: "#0da156",
+    borderColor: "#1b6b45"
   },
 ];

@@ -1,7 +1,6 @@
 import Hero from '../components/Hero'
 import Categories from '../components/Categories'
 import Angebote from '../components/Angebote'
-// import BestSeller from '../components/BestSeller'
 
 const Home = () => {
   return (
@@ -9,7 +8,6 @@ const Home = () => {
 <Hero />
 <Categories/>
 <Angebote />
-{/* <BestSeller /> */}
     </div>
   )
 }
