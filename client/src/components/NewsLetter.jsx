@@ -7,15 +7,15 @@ const NewsLetter = () => {
                 Abonniere unseren Newsletter, um die neuesten Angebote, Neuheiten und exklusive Rabatte zu erhalten.
             </p>
             <form className="flex items-center justify-between 
-            max-w-2xl w-full md:h-13 h-12">
+            md:max-w-2xl w-full md:h-13 h-12">
                 <input
-                    className="border border-primary-dull/20 rounded-md h-full border-r-0 
-                    outline-none w-full rounded-r-none px-3 text-black placeholder:text-primary"
+                    className="border border-primary-dull/20 rounded-full h-full border-r-0 
+                    outline-none w-full rounded-r-none px-3 text-black placeholder:text-primary md:placeholder:pl-5"
                     type="text"
                     placeholder="E-Mail-Adresse eingeben"
                     required
                 />
-                <button type="submit" className="md:px-12 px-8 h-full text-white bg-primary hover:bg-dark-green transition-all cursor-pointer rounded-md rounded-l-none">
+                <button type="submit" className="md:px-12 px-2 h-full text-white bg-primary hover:bg-dark-green transition-all cursor-pointer rounded-full rounded-l-none">
                     Abonnieren
                 </button>
             </form>
