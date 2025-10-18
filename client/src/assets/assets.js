@@ -18,6 +18,9 @@ import box_icon from "./box_icon.svg";
 import black_arrow_icon from "./black_arrow_icon.svg";
 import white_arrow_icon from "./white_arrow_icon.svg";
 import plus_icon from "./plus_icon.svg";
+import arrow_left_icon from "./arrow-left-circle_icon.svg";
+import arrow_right_icon from "./arrow-right-circle_icon.svg";
+
 import main_banner_bg from "./main_banner_bg.png";
 import main_banner_bg_sm from "./main_banner_bg_sm.png";
 import bottom_banner_image from "./bottom_banner_image.png";
@@ -79,6 +82,9 @@ export const assets = {
   menu_icon,
   black_arrow_icon,
   white_arrow_icon,
+  arrow_left_icon,
+  arrow_right_icon,
+
   main_banner_bg,
   main_banner_bg_sm,
   bottom_banner_image,

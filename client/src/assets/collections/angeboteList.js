@@ -8,7 +8,7 @@ import oatly_haferdrink_1_5F_1L_image from "../oatly_haferdrink_1_5_Fett_Liter_i
 import chinkali_hackfleischfüllung_image from "../chinkali_hackfleischfüllung_image.png";
 import mozzarella_galbani_image from "../mozzarella_galbani_image.png";
 
-export const assets = {
+export const assetsAngebote = {
   blaubeersaft_image,
   koelln_cereals_image,
   oatly_haferdrink_1_5F_1L_image,
@@ -118,5 +118,23 @@ export const angebote = [
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
     inStock: true,
-  }
+  },
+    {
+      _id: "1234qwert", 
+      name: "Waldheidelbeersaft",
+      volume: "0,7L",
+      category: "Alkoholfreie Getränke",
+      price: 7.99,
+      offerPrice: 5.99,
+      image: [blaubeersaft_image],
+      description: [
+        "100% Bio Heidelbeersaft",
+        "Muttersaft aus wilden Waldheidelbeeren",
+        "EU-Öko zertifiziert",
+        "Kalt gepresst, abgefüllt unter Vakuum, pasteurisiert",
+      ],
+      createdAt: "2025-03-25T07:17:46.018Z",
+      updatedAt: "2025-03-25T07:18:13.103Z",
+      inStock: true,
+    },
 ];

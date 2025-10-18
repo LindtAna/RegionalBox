@@ -20,7 +20,7 @@ const logout = async() => {
            </NavLink>
 
             {/* Desktop Menu */}
-            <div className="hidden sm:flex items-center gap-15 text-xl">
+            <div className="hidden sm:flex items-center gap-15 text-xl font-semibold">
                 <NavLink to='/' className='hover:text-primary hover:transition-duration:200ms'>Home</NavLink>
                 <NavLink to='/products' className='hover:text-primary hover:transition-duration:200ms'>Produkte</NavLink>
                 <NavLink to='/contact' className='hover:text-primary hover:transition-duration:200ms'>Kontakt</NavLink>

@@ -55,4 +55,10 @@ export const categories = [
     bgColor: "#0da156",
     borderColor: "#1b6b45"
   },
+   {
+    text: "Süßes",
+    path: "Sweets",
+    image: vegetable_image,
+    bgColor: "#ACDF87"
+  },
 ];

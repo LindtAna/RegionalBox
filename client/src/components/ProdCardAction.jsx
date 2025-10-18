@@ -21,22 +21,26 @@ const ProdCardAction = ({actionProduct}) => {
                    <p className="text-gray-700">{actionProduct.volume}</p>
                 </div>
                 <div className="flex items-end justify-between mt-3">
-                    <p className="md:text-xl text-base font-medium text-green-500">
-                      {currency}{actionProduct.offerPrice}{' '}<span className="text-gray-500/60 md:text-sm 
-                      text-xs line-through">
-                        {currency}{actionProduct.price}</span> 
-                    </p>
-                    <div  onClick={(e) => {e.stopPropagation()}} className="text-dark-green">
+                    <div className="flex flex-col leading-tight">
+                    <p className="md:text-xl text-base font-medium text-green-500 whitespace-nowrap">
+                      {currency}{actionProduct.offerPrice}{' '} </p>
+                      <span className="text-gray-500/60 md:text-sm 
+                      text-xs line-through whitespace-nowrap">
+                        {currency}{actionProduct.price}
+                        </span> 
+                    </div>
+                    <div  onClick={(e) => {e.stopPropagation()}} className="text-dark-green flex-shrink-0">
                         {!actionCardItems[actionProduct._id] ? (
                             <button className="flex items-center justify-center gap-1 bg-emerald-200/60
-                            border border-emerald-200 md:w-[80px]
+                            border border-emerald-200 
                             w-[64px] h-[34px] rounded cursor-pointer"
                             onClick={() => addToCart(actionProduct._id)} >
-                              <img src={assets.cart_icon_s}/>  <img src={assets.plus_icon}/>
+                              <img src={assets.cart_icon_s}/>
+                              <img src={assets.plus_icon}/>
                             </button>
                         ) : (
-                            <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-primary/25 
-                            rounded select-none">
+                            <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px]
+                            bg-primary/25 rounded select-none">
                                 <button onClick={() => {removeFromCart(actionProduct._id)}} 
                                 className="cursor-pointer text-md px-2 h-full" >
                                     -
