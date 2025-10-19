@@ -45,8 +45,8 @@ const NavBar = () => {
                             className="py-1.5 w-full bg-transparent outline-none placeholder-primary"
                             type="text" placeholder="Suche..." />
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.836 10.615 15 14.695" stroke="#1b6b45" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path clip-rule="evenodd" d="M9.141 11.738c2.729-1.136 4.001-4.224 2.841-6.898S7.67.921 4.942 2.057C2.211 3.193.94 6.281 2.1 8.955s4.312 3.92 7.041 2.783" stroke="#1b6b45" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10.836 10.615 15 14.695" stroke="#1b6b45" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path clipRule="evenodd" d="M9.141 11.738c2.729-1.136 4.001-4.224 2.841-6.898S7.67.921 4.942 2.057C2.211 3.193.94 6.281 2.1 8.955s4.312 3.92 7.041 2.783" stroke="#1b6b45" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </div>
 

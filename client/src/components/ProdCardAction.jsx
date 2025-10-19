@@ -31,7 +31,7 @@ const {currency, addToCart, removeFromCart, actionCardItems } = useAppContext()
                     </div>
                     <div  onClick={(e) => {e.stopPropagation()}} className="text-dark-green flex-shrink-0">
                         {!actionCardItems[actionProduct._id] ? (
-                            <button className="flex items-center justify-center gap-3 bg-emerald-200/60
+                            <button className="flex items-center justify-center gap-1 sm:gap-3 bg-emerald-200/60
                             border border-emerald-200 
                             w-[64px] h-[34px] rounded cursor-pointer"
                             onClick={() => addToCart(actionProduct._id, "action")} >

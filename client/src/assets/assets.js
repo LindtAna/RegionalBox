@@ -2,11 +2,8 @@ import logo from "./logo.png";
 import search_icon from "./search_icon.svg";
 import remove_icon from "./remove_icon.svg";
 import arrow_right_icon_colored from "./arrow_right_icon_colored.svg";
-import star_icon from "./star_icon.svg";
-import star_dull_icon from "./star_dull_icon.svg";
 import cart_icon from "./cart_icon.svg";
 import cart_icon_s from "./cart_icon_s.svg";
-import nav_cart_icon from "./nav_cart_icon.svg";
 import add_icon from "./add_icon.svg";
 import refresh_icon from "./refresh_icon.svg";
 import product_list_icon from "./product_list_icon.svg";
@@ -38,11 +35,8 @@ export const assets = {
   search_icon,
   remove_icon,
   arrow_right_icon_colored,
-  star_icon,
-  star_dull_icon,
   cart_icon,
   cart_icon_s,
-  nav_cart_icon,
   add_icon,
   refresh_icon,
   product_list_icon,
