@@ -99,7 +99,6 @@ export const dummyProducts = [
     name: "Taschki Pelmeni",
     category: "Instant",
     price: 40,
-    offerPrice: 35,
     image: [taschki_pelmeni_image],
     description: [
       "Healthy alternative with oats",

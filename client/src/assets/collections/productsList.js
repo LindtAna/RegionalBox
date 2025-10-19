@@ -54,14 +54,13 @@ export const allProducts = [
   },
   {
     _id: "gd48g45h",
-    name: "Carrot",
-    volume: "500g",
+    name: "Tomate",
+    volume: "1kg",
     category: "Gemüse",
     price: 2.46,
-    image: [carrot_image],
+    image: [tomato_image],
     description: [
       "Sweet and crunchy",
-      "Good for eyesight",
       "Ideal for juices and salads",
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
@@ -105,7 +104,7 @@ export const allProducts = [
     name: "Onion",
     volume: "500g",
     category: "Gemüse",
-    price: 22,
+    price: 0.22,
     image: [onion_image_1],
     description: [
       "Fresh and pungent",
