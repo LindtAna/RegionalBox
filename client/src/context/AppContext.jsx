@@ -25,7 +25,7 @@ export const AppContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
     const [cardItems, setCardItems] = useState({})
 
-    const [searchQuery, setSearchQuery] = useState({})
+    const [searchQuery, setSearchQuery] = useState("")
 
    //Fetch alle Produkte
   const fetchActionProducts = async () => setActionProducts(angebote);

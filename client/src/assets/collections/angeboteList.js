@@ -7,6 +7,9 @@ import lindor_pistazien_image from "../lindor_pistazien_image.png";
 import oatly_haferdrink_1_5F_1L_image from "../oatly_haferdrink_1_5_Fett_Liter_image.png";
 import chinkali_hackfleischfüllung_image from "../chinkali_hackfleischfüllung_image.png";
 import mozzarella_galbani_image from "../mozzarella_galbani_image.png";
+import monaco_ginger_ale_image from "../aqua-monaco-ginger-ale.png";
+import kuchenmeister_butterstollen_image from "../kuchenmeister_butterstollen.png";
+
 
 export const assetsAngebote = {
   blaubeersaft_image,
@@ -14,7 +17,8 @@ export const assetsAngebote = {
   oatly_haferdrink_1_5F_1L_image,
   lindor_pistazien_image,
   chinkali_hackfleischfüllung_image,
-  mozzarella_galbani_image
+  mozzarella_galbani_image,
+  kuchenmeister_butterstollen_image
 };
 
 export const angebote = [  
@@ -120,21 +124,38 @@ export const angebote = [
     inStock: true,
   },
     {
-      _id: "1234qwert", 
-      name: "Waldheidelbeersaft",
-      volume: "0,7L",
+      _id: "1234ingale", 
+      name: "Aqua Monaco Ginger Ale",
+      volume: "230ml",
       category: "Alkoholfreie Getränke",
-      price: 7.99,
-      offerPrice: 5.99,
-      image: [blaubeersaft_image],
+      price: 1.99,
+      offerPrice: 1.69,
+      image: [monaco_ginger_ale_image],
       description: [
-        "100% Bio Heidelbeersaft",
-        "Muttersaft aus wilden Waldheidelbeeren",
-        "EU-Öko zertifiziert",
-        "Kalt gepresst, abgefüllt unter Vakuum, pasteurisiert",
+        "Ragend feine, natürliche Ingwernote",
+        "Feingliedrige Ingwer aus demperuanischen Hochland",
+        "Vegan sowie 100% bio",
+        "Klassisch als Mule oder auf Eis geniessen",
       ],
       createdAt: "2025-03-25T07:17:46.018Z",
       updatedAt: "2025-03-25T07:18:13.103Z",
       inStock: true,
     },
+    {
+    _id: "gd48asdf",
+    name: "Kuchenmeister Butterstollen Scheiben",
+    volume: "250g",
+    category: "Süßes",
+    price: 2.99,
+    offerPrice: 2.49,
+    image: [kuchenmeister_butterstollen_image],
+    description: [
+      "Nach traditionellem Konditor-Rezept gebacken",
+      "Gefüllt mit saftigem Marzipan",
+      "Rosinen und kandierte Früchte runden seinen klassischen Stollen-Geschmack ab",
+    ],
+    createdAt: "2025-03-25T07:17:46.018Z",
+    updatedAt: "2025-03-25T07:18:13.103Z",
+    inStock: true,
+  },
 ];

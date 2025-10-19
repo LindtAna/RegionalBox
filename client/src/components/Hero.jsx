@@ -28,7 +28,7 @@ text-white cursor-pointer'>
                         Jetzt einkaufen
                         <img className='md:hidden transition group-focus:translate-x-1' src={assets.white_arrow_icon} alt='' />
                     </Link>
-                    <Link to={'/products'}
+                    <Link to={'/deals'}
                         className='group text-sm md:text-lg flex items-center gap-2 px-7 py-3 cursor-pointer'>
                         Angebote anschauen
                         <img className='group transition group-hover:translate-x-1' src={assets.black_arrow_icon} alt='' />
