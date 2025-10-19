@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { angebote } from "../assets/collections/angeboteList";
+import { allProducts } from "../assets/collections/productsList";
 
 
 //Context for managing user state and navigation.
@@ -14,56 +15,97 @@ export const AppContextProvider = ({ children }) => {
 
     const currency = import.meta.env.VITE_CURRENCY;
     const navigate = useNavigate();
+
     const [user, setUser] = useState(null)
     const [isSeller, setIsSeller] = useState(false)
     const [showUserLogin, setShowUserLogin] = useState(false)
+
     const [actionProducts, setActionProducts] = useState([])
     const [actionCardItems, setActionCardItems] = useState({})
+    const [products, setProducts] = useState([])
+    const [cardItems, setCardItems] = useState({})
 
-    //Fetch alle Produkte
-    const fetchActionProducts = async () => {
-        setActionProducts(angebote)
-    }
+    const [searchQuery, setSearchQuery] = useState({})
+
+   //Fetch alle Produkte
+  const fetchActionProducts = async () => setActionProducts(angebote);
+  const fetchProducts = async () => setProducts(allProducts);
+
+   useEffect(() => {
+    fetchActionProducts();
+    fetchProducts();
+  }, []);
+
+
+  // Liefert die Warenkorbdaten je nach Produkttyp ("action" oder regulär)
+  const getCartData = (type) =>
+    type === "action"
+      ? structuredClone(actionCardItems)
+      : structuredClone(cardItems);
+
+  const setCartData = (type, data) =>
+    type === "action" ? setActionCardItems(data) : setCardItems(data);
 
 
     // Produkt in den Warenkorb legen
-    const addToCart = (itemId) => {
-        let actionCartData = structuredClone(actionCardItems);
+   const addToCart = (itemId, type = "regular") => {
+    let cartData = getCartData(type);
 
-        if (actionCartData[itemId]) actionCartData[itemId] += 1;
-        else actionCartData[itemId] = 1;
-        setActionCardItems(actionCartData);
-        toast.success('Zum Warenkorb hinzugefügt')
-    }
+    if (cartData[itemId]) cartData[itemId] += 1;
+    else cartData[itemId] = 1;
+
+    setCartData(type, cartData);
+    toast.success("Zum Warenkorb hinzugefügt");
+  };
+
 
     // Artikelmenge im Warenkorb aktualisieren
-    const updateCartItem = (itemId, quantity) => {
-        let actionCartData = structuredClone(actionCardItems);
-        actionCartData[itemId] = quantity;
-        setActionCardItems(actionCartData)
-        toast.success('Warenkorb aktualisiert')
-    }
+    const updateCartItem = (itemId, quantity, type = "regular") => {
+    let cartData = getCartData(type);
+    cartData[itemId] = quantity;
+    setCartData(type, cartData);
+    toast.success("Warenkorb aktualisiert");
+  };
 
     // Produkt aus dem Warenkorb entfernen
-    const removeFromCart = (itemId) => {
-        let actionCartData = structuredClone(actionCardItems);
-        if (actionCartData[itemId]) {
-            actionCartData[itemId] -= 1;
-            if(actionCartData[itemId] === 0) delete actionCartData[itemId];
-        }
-        toast.success('Aus dem Warenkorb entfernt')
-        setActionCardItems(actionCartData)
+    const removeFromCart = (itemId, type = "regular") => {
+    let cartData = getCartData(type);
+
+    if (cartData[itemId]) {
+      cartData[itemId] -= 1;
+      if (cartData[itemId] === 0) delete cartData[itemId];
     }
 
-    useEffect(() => {
-        fetchActionProducts()
-    }, [])
+    setCartData(type, cartData);
+    toast.success("Aus dem Warenkorb entfernt");
+  };
 
     const value = {
-        navigate, user, setUser, setIsSeller,
-        isSeller, showUserLogin, setShowUserLogin, actionProducts,
-        currency, addToCart, updateCartItem, removeFromCart,
-        actionCardItems
+    navigate,
+    user,
+    setUser,
+    isSeller,
+    setIsSeller,
+    showUserLogin,
+    setShowUserLogin,
+    currency,
+    searchQuery,
+    setSearchQuery,
+
+    products,
+    setProducts,
+    actionProducts,
+    setActionProducts,
+    currency,
+
+    cardItems,
+    setCardItems,
+    actionCardItems,
+    setActionCardItems,
+
+    addToCart,
+    updateCartItem,
+    removeFromCart,
     }
 
     return <AppContext.Provider value={value} >

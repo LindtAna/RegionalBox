@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {NavLink} from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
 
 const NavBar = () => {
 const [open, setOpen] = React.useState(false)
-const {user, setUser,setShowUserLogin, navigate} = useAppContext()
+const {user, setUser,setShowUserLogin, navigate, searchQuery, setSearchQuery} = useAppContext()
 
 const logout = async() => {
     setUser(null) ;
     navigate('/')
 }
+
+useEffect(() => {
+if(searchQuery.lenght > 0) navigate('/products')
+}, [searchQuery])
+
+
    return (
         <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b
          border-dark-green/20 bg-white relative transition-all">
@@ -22,11 +28,15 @@ const logout = async() => {
             {/* Desktop Menu */}
             <div className="hidden sm:flex items-center gap-10 text-xl font-semibold">
                 <NavLink to='/' className='hover:text-primary hover:transition-duration:200ms'>Home</NavLink>
-                <NavLink to='/products' className='hover:text-primary hover:transition-duration:200ms'>Produkte</NavLink>
-                <NavLink to='/contact' className='hover:text-primary hover:transition-duration:200ms'>Kontakt</NavLink>
+                <NavLink to='/products' className='hover:text-primary hover:transition-duration:200ms'>Alle Produkte</NavLink>
+                <NavLink to='/deals' className='hover:text-primary hover:transition-duration:200ms flex'>Angebote
+                <img src={assets.deals_icon}/>
+                </NavLink>
 
                 <div className="hidden lg:flex items-center text-sm gap-2 border border-primary-dull/20 px-3 rounded-full">
-                    <input className="py-1.5 w-full bg-transparent outline-none placeholder-primary" type="text" placeholder="Suche..." />
+                    <input onChange={(e) => {setSearchQuery(e.target.value)}}
+                    className="py-1.5 w-full bg-transparent outline-none placeholder-primary" 
+                    type="text" placeholder="Suche..." />
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.836 10.615 15 14.695" stroke="#1b6b45" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                         <path clip-rule="evenodd" d="M9.141 11.738c2.729-1.136 4.001-4.224 2.841-6.898S7.67.921 4.942 2.057C2.211 3.193.94 6.281 2.1 8.955s4.312 3.92 7.041 2.783" stroke="#1b6b45" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
@@ -64,11 +74,11 @@ const logout = async() => {
             <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md
             py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
                <NavLink to='/' onClick={() => setOpen(false)}>Home</NavLink>
-                <NavLink to='/products'onClick={() => setOpen(false)}>Produkte</NavLink>
+                <NavLink to='/products'onClick={() => setOpen(false)}>Alle Produkte</NavLink>
                 {user &&
                 <NavLink to='/orders' onClick={() => setOpen(false)}>Einkaufswagen</NavLink>
                 }
-                <NavLink to='/contact'onClick={() => setOpen(false)}>Kontakt</NavLink>
+                <NavLink to='/deals'onClick={() => setOpen(false)}>Angebote</NavLink>
                 {!user ? (
                     <button onClick={() => {
                         setOpen(false);
