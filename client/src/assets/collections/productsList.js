@@ -1,4 +1,4 @@
-import tomato_image from "../tomato_image.png";
+// import tomato_image from "../tomato_image.png";
 import carrot_image from "../carrot_image.png";
 import apple_image from "../apple_image.png";
 import amul_milk_image from "../amul_milk_image.png";
@@ -33,6 +33,10 @@ import brown_rice_image from "../brown_rice_image.png";
 import barley_image from "../barley_image.png";
 import taschki_pelmeni_image from "../pelmeni.png";
 import blaubeersaft_image from "../blaubeersaft_image.png";
+import potato_image_1 from "../potato_image_1.png";
+import potato_image_2 from "../potato_image_2.png";
+import potato_image_3 from "../potato_image_3.png";
+import potato_image_4 from "../potato_image_4.png";
 
 export const allProducts = [
   // Vegetables
@@ -53,12 +57,12 @@ export const allProducts = [
     inStock: true,
   },
   {
-    _id: "gd48g45h",
-    name: "Tomate",
+    _id: "gd48kartt",
+    name: "Kartoffel",
     volume: "1kg",
     category: "Gemüse",
     price: 2.46,
-    image: [tomato_image],
+    image: [potato_image_1, potato_image_2, potato_image_3, potato_image_4],
     description: [
       "Sweet and crunchy",
       "Ideal for juices and salads",

@@ -13,11 +13,10 @@ const CategoryProducts = () => {
     (item) => item.path.toLowerCase() === category?.toLowerCase()
   )
 
-// 
 //   if (!searchCategory) {
 //     return (
 //       <div className='flex items-center justify-center h-[60vh]'>
-//         <p className='text-2xl font-medium text-primary'>Category not found</p>
+//         <p className='text-2xl font-medium text-primary'>Kategorie nicht gefunden</p>
 //       </div>
 //     )
 //   }
@@ -25,13 +24,10 @@ const CategoryProducts = () => {
   const categoryText = searchCategory.text
 
   // Filterung
-  const filteredActionProducts = actionProducts.filter(
-    (actionProduct) => actionProduct.category === categoryText
+  const filteredActionProducts = actionProducts.filter((actionProduct) => actionProduct.category === categoryText
   )
 
-  const filteredRegularProducts = products.filter(
-    (product) => product.category === categoryText
-  )
+  const filteredRegularProducts = products.filter((product) => product.category === categoryText)
 
   // Zusammenführen in ein Array für Rendering
   const allFilteredProducts = [
@@ -79,11 +75,17 @@ const CategoryHeader = ({ category }) => (
 // Produkte
 const ProductsGrid = ({ products }) => (
   <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6'>
-    {products.map(({ _id, type, ...product }) => 
-      type === 'action' ? (
-        <ProdCardAction key={_id} actionProduct={product} />
+    {products.map((product) => 
+      product.type === 'action' ? (
+        <ProdCardAction 
+          key={product._id} 
+          actionProduct={product} 
+        />
       ) : (
-        <ProductCard key={_id} product={product} />
+        <ProductCard 
+          key={product._id} 
+          product={product} 
+        />
       )
     )}
   </div>

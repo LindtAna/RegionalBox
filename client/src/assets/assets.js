@@ -79,7 +79,7 @@ export const dummyProducts = [
     inStock: true,
   },
   {
-    _id: "in05j29q",
+    _id: "in05nood",
     name: "Oats Noodles 72g",
     category: "Instant",
     price: 40,
@@ -95,7 +95,7 @@ export const dummyProducts = [
     inStock: true,
   },
     {
-    _id: "in05j29q",
+    _id: "in0pelm",
     name: "Taschki Pelmeni",
     category: "Instant",
     price: 40,

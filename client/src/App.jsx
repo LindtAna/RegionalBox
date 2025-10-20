@@ -8,6 +8,8 @@ import LoginForm from './components/LoginForm'
 import AllProducts from './pages/AllProducts'
 import Angebote from './pages/Angebote'
 import CategoryProducts from './pages/CategoryProducts'
+import ActionProductDetails from './pages/ActionProductDetails'
+import ProductDetails from './pages/ProductDetails'
 
 const App = () => {
 
@@ -25,6 +27,9 @@ const App = () => {
             <Route  path='/products' element={<AllProducts/>}/>
             <Route  path='/deals' element={<Angebote/>}/>
             <Route  path='/products/:category' element={<CategoryProducts/>}/>
+            <Route  path='/deals/:category' element={<CategoryProducts/>}/>
+            <Route  path='/products/:category/:id' element={<ProductDetails />}/>
+            <Route  path='/deals/:category/:id' element={<ActionProductDetails />}/>
           </Routes>
         </div>
        {!isSellerPath && <Footer />}

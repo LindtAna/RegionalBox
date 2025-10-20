@@ -5,10 +5,11 @@ import { useAppContext } from '../context/AppContext';
 
 const ProductCard = ({product}) => {
 
-const { currency, addToCart, removeFromCart, cardItems } = useAppContext()
+const { currency, addToCart, removeFromCart, cardItems, navigate } = useAppContext()
 
     return product && (
-        <div className="border border-dark-green/20 rounded-md md:px-4 px-3 py-2
+        <div onClick={() => {navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0)}} 
+        className="border border-dark-green/20 rounded-md md:px-4 px-3 py-2
          bg-white max-w-56 w-full">
 
             <div className="group cursor-pointer flex items-center justify-center px-2">

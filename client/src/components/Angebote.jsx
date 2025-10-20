@@ -2,7 +2,6 @@
 
 import ProdCardAction from './ProdCardAction'
 import { useAppContext } from '../context/AppContext';
-import { assets } from '../assets/assets'
 
 const Angebote = () => {
   const { actionProducts } = useAppContext();

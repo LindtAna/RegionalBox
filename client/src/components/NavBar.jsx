@@ -42,6 +42,7 @@ const NavBar = () => {
                     {/* Suche -> Desktop */}
                     <div className="hidden lg:flex items-center text-sm gap-2 border border-primary-dull/20 px-3 rounded-full">
                         <input onChange={(e) => { setSearchQuery(e.target.value) }}
+                            value={typeof searchQuery === 'string' ? searchQuery : ''}
                             className="py-1.5 w-full bg-transparent outline-none placeholder-primary"
                             type="text" placeholder="Suche..." />
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
