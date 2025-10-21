@@ -3,6 +3,7 @@ import { useAppContext } from '../context/AppContext';
 import { Link, useParams } from "react-router-dom";
 import { categories } from "../assets/collections/categoriesList";
 import ProdCardAction from "../components/ProdCardAction";
+import { assets } from "../assets/assets";
 
 const ActionProductDetails = () => {
 
@@ -12,20 +13,26 @@ const ActionProductDetails = () => {
 
     const [relatedActionProducts, setRelatedActionProducts] = useState([]);
     const [thumbnail, setThumbnail] = useState(null);
+    const [visibleCount, setVisibleCount] = useState(5);
 
     const actionProduct = actionProducts.find((item) => item._id === id);
 
     const categoryData = categories.find(
         (cat) => cat.text.toLowerCase() === actionProduct?.category.toLowerCase()
     );
+ 
     useEffect(() => {
-        if (actionProducts.length > 0) {
-            let actionProductsCopy = actionProducts.slice();
-            actionProductsCopy = actionProductsCopy
-                .filter((item) => actionProduct.category === item.category)
-            setRelatedActionProducts(actionProductsCopy.slice(0, 5))
+        if (actionProducts.length > 0 && actionProduct) {
+            const filtered = actionProducts.filter(
+                (item) => item.category === actionProduct.category && item._id !== actionProduct._id
+            );
+            setRelatedActionProducts(filtered.slice(0, visibleCount));
         }
-    }, [actionProducts])
+    }, [actionProducts, actionProduct, visibleCount]);
+
+    const handleSeeMore = () => {
+        setVisibleCount((prev) => prev + 5);
+    };
 
     useEffect(() => {
         setThumbnail(actionProduct?.image[0] ? actionProduct.image[0] : null)
@@ -78,7 +85,7 @@ const ActionProductDetails = () => {
                     </ul>
 
                     <div className="max-w-72 flex flex-col items-start mt-10 gap-4 text-base">
-                        <button onClick={() => {addToCart(actionProduct._id)}} className="w-full py-3.5 cursor-pointer font-medium bg-primary text-white hover:bg-dark-green transition rounded-full" >
+                        <button onClick={() => { addToCart(actionProduct._id) }} className="w-full py-3.5 cursor-pointer font-medium bg-primary text-white hover:bg-dark-green transition rounded-full" >
                             In den Einkaufswagen
                         </button>
                         <button onClick={() => { addToCart(actionProduct._id); navigate('/cart') }}
@@ -89,14 +96,14 @@ const ActionProductDetails = () => {
                 </div>
             </div>
 
-             {/* Related Products */}
+            {/* Related Products */}
             <div className="flex flex-col items-center mt-10">
                 <div className="flex flex-col items-center w-max">
-                    <p className="text-2xl font-medium">Related Products</p>
+                    <p className="text-2xl font-medium">Verwandte Produkte</p>
                     <div className="w-20 h-0.5 bg-primary rounded-full mt-2"></div>
                 </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5
                 gap-3 md:gap-6 mt-3 w-full">
                     {relatedActionProducts.filter((actionProduct) => actionProduct.inStock)
                         .map((actionProduct, index) => (
@@ -106,10 +113,20 @@ const ActionProductDetails = () => {
                             />
                         ))}
                 </div>
-<button onClick={() => {navigate('/products'); scrollTo(0,0)}}
-className="mx-auto cursor-pointer px-12 my-4 py-2.5 border rounded-full bg-primary
-text-white hover:bg-dark-green transition"
->See More</button>
+                {relatedActionProducts.length <
+                    actionProducts.filter(item => item.category === actionProduct.category).length - 1 && (
+                        <button
+                            onClick={handleSeeMore}
+                            className="group relative flex flex-col items-center text-2xl mx-auto cursor-pointer px-12 my-4 py-2.5 rounded-full bg-transparent text-primary hover:text-dark-green transition"
+                        >
+                            Mehr anzeigen
+                            <img
+                                src={assets.arrow_down_icon}
+                                alt="Mehr anzeigen Icon"
+                                className="w-6 h-6 mt-1 transition-transform duration-200 group-hover:translate-y-1 group-hover:brightness-75"
+                            />
+                        </button>
+                    )}
             </div>
         </div>
     );

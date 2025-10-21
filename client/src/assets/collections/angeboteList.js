@@ -142,7 +142,7 @@ export const angebote = [
       inStock: true,
     },
     {
-    _id: "gd48asdf",
+    _id: "gd4stoll",
     name: "Kuchenmeister Butterstollen Scheiben",
     volume: "250g",
     category: "Süßes",
@@ -158,4 +158,5 @@ export const angebote = [
     updatedAt: "2025-03-25T07:18:13.103Z",
     inStock: true,
   },
+  
 ];

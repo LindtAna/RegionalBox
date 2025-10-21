@@ -13,10 +13,10 @@ const NavBar = () => {
     }
 
     useEffect(() => {
-        if (typeof searchQuery === "string" && searchQuery.length > 0) {
+        if (searchQuery.length > 0) {
             navigate("/products");
         }
-    }, [searchQuery, navigate]);
+    }, [searchQuery]);
 
 
     return (

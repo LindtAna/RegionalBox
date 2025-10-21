@@ -88,7 +88,6 @@ export const AppContextProvider = ({ children }) => {
     setIsSeller,
     showUserLogin,
     setShowUserLogin,
-    currency,
     searchQuery,
     setSearchQuery,
 

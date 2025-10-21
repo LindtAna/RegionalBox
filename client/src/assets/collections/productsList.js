@@ -37,6 +37,11 @@ import potato_image_1 from "../potato_image_1.png";
 import potato_image_2 from "../potato_image_2.png";
 import potato_image_3 from "../potato_image_3.png";
 import potato_image_4 from "../potato_image_4.png";
+import ananas_image_1 from "../ananas_image_1.png";
+import ananas_image_2 from "../ananas_image_2.png";
+import dragonfruit_image from "../dragonfruit_image.png";
+import persimone_image_1 from "../persimone_image_1.png";
+import persimone_image_2 from "../persimone_image_2.png";
 
 export const allProducts = [
   // Vegetables
@@ -203,6 +208,55 @@ export const allProducts = [
     updatedAt: "2025-03-25T07:18:13.103Z",
     inStock: true,
   },
+  {
+    _id: "ek55anan",
+    name: "Ananas",
+    volume: "500g",
+    category: "Obst",
+    price: 1.70,
+    image: [ananas_image_1, ananas_image_2],
+    description: [
+      "Fresh and juicy",
+      "Rich in antioxidants",
+      "Perfect for snacking and fruit salads",
+    ],
+    createdAt: "2025-03-25T07:17:46.018Z",
+    updatedAt: "2025-03-25T07:18:13.103Z",
+    inStock: true,
+  },
+  {
+    _id: "ek55drgfr",
+    name: "Dragonfruit",
+    volume: "500g",
+    category: "Obst",
+    price: 1.70,
+    image: [dragonfruit_image],
+    description: [
+      "Fresh and juicy",
+      "Rich in antioxidants",
+      "Perfect for snacking and fruit salads",
+    ],
+    createdAt: "2025-03-25T07:17:46.018Z",
+    updatedAt: "2025-03-25T07:18:13.103Z",
+    inStock: true,
+  },
+  {
+    _id: "ekperss",
+    name: "Persimone",
+    volume: "500g",
+    category: "Obst",
+    price: 1.70,
+    image: [persimone_image_1, persimone_image_2],
+    description: [
+      "Fresh and juicy",
+      "Rich in antioxidants",
+      "Perfect for snacking and fruit salads",
+    ],
+    createdAt: "2025-03-25T07:17:46.018Z",
+    updatedAt: "2025-03-25T07:18:13.103Z",
+    inStock: true,
+  },
+  
 
   // Dairy
   {

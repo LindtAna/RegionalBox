@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext';
 import { Link, useParams } from "react-router-dom";
 import { categories } from "../assets/collections/categoriesList";
 import ProductCard from "../components/ProductCard";
-
+import { assets } from "../assets/assets";
 
 const ProductDetails = () => {
 
@@ -13,20 +13,25 @@ const ProductDetails = () => {
 
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [thumbnail, setThumbnail] = useState(null);
+    const [visibleCount, setVisibleCount] = useState(5);
 
     const product = products.find((item) => item._id === id);
     const categoryData = categories.find(
   (cat) => cat.text.toLowerCase() === product.category.toLowerCase()
 );
 
-    useEffect(() => {
-        if (products.length > 0) {
-            let productsCopy = products.slice();
-            productsCopy = productsCopy
-                .filter((item) => product.category === item.category)
-            setRelatedProducts(productsCopy.slice(0, 5))
+     useEffect(() => {
+        if (products.length > 0 && product) {
+            const filtered = products.filter(
+                (item) => product.category === item.category && item._id !== product._id
+            );
+            setRelatedProducts(filtered.slice(0, visibleCount));
         }
-    }, [products])
+    }, [products, product, visibleCount]);
+
+     const handleSeeMore = () => {
+        setVisibleCount((prev) => prev + 5); 
+    };
 
     useEffect(() => {
         setThumbnail(product?.image[0] ? product.image[0] : null)
@@ -87,7 +92,7 @@ const ProductDetails = () => {
             {/* Related Products */}
             <div className="flex flex-col items-center mt-10">
                 <div className="flex flex-col items-center w-max">
-                    <p className="text-2xl font-medium">Related Products</p>
+                    <p className="text-2xl font-medium">Verwandte Produkte</p>
                     <div className="w-20 h-0.5 bg-primary rounded-full mt-2"></div>
                 </div>
 
@@ -101,10 +106,20 @@ const ProductDetails = () => {
                             />
                         ))}
                 </div>
-<button onClick={() => {navigate('/products'); scrollTo(0,0)}}
-className="mx-auto cursor-pointer px-12 my-4 py-2.5 border rounded-full bg-primary
-text-white hover:bg-dark-green transition"
->See More</button>
+{relatedProducts.length < products.filter(p => p.category === product.category).length - 1 && (
+                    <button
+    onClick={handleSeeMore}
+    className="group relative flex flex-col items-center text-2xl mx-auto cursor-pointer px-12 my-4 py-2.5 rounded-full bg-transparent text-primary hover:text-dark-green transition"
+  >
+    Mehr anzeigen
+    <img
+      src={assets.arrow_down_icon}
+      alt=""
+      className="w-6 h-6 mt-1 transition-transform duration-200 group-hover:translate-y-1 group-hover:brightness-75"
+    />
+  </button>
+                    
+                )}
             </div>
         </div>
     );

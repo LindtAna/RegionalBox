@@ -18,6 +18,7 @@ import plus_icon from "./plus_icon.svg";
 import arrow_left_icon from "./arrow-left-circle_icon.svg";
 import arrow_right_icon from "./arrow-right-circle_icon.svg";
 import deals_icon from "./deals.svg";
+import arrow_down_icon from "./arrow-down-icon.svg";
 
 
 import main_banner_bg from "./main_banner_bg.png";
@@ -58,6 +59,7 @@ export const assets = {
   box_icon,
   blaubeersaft_image,
   plus_icon,
+  arrow_down_icon,
 };
 
 export const dummyProducts = [
