@@ -542,7 +542,7 @@ export const allProducts = [
     _id: "bk03c31x",
     name: "Chocolate Cake",
     volume: "500g",
-    category: "Brot & Gebäck",
+    category: "Süßes",
     price: 3.50,
     image: [chocolate_cake_image],
     description: [
@@ -574,7 +574,7 @@ export const allProducts = [
     _id: "bk05e33v",
     name: "Vanilla Muffins",
     volume: "6 Stk",
-    category: "Brot & Gebäck",
+    category: "Süßes",
     price: 8.45,
     image: [vanilla_muffins_image],
     description: [

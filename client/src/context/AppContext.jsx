@@ -80,6 +80,55 @@ export const AppContextProvider = ({ children }) => {
     toast.success("Aus dem Warenkorb entfernt");
   };
 
+
+
+// Warenkorb-Zähler für hinzugefügte Produkte
+// Preis je nach Produkttyp erhalten
+const getItemPrice = (product, type) =>
+  type === "action" ? product.offerPrice : product.price;
+
+
+// Berechnung der Anzahl der Produkte
+const getCartCount = (type = "all") => {
+  let totalCount = 0;
+
+  // Wenn alles auf einmal gezählt werden soll (sowohl Aktions- als auch reguläre Produkte)
+  if (type === "all" || type === "regular") {
+    for (const item in cardItems) totalCount += cardItems[item];
+  }
+  if (type === "all" || type === "action") {
+    for (const item in actionCardItems) totalCount += actionCardItems[item];
+  }
+
+  return totalCount;
+};
+
+
+// Berechnung des Gesamtbetrags
+const getCartAmount = (type = "all") => {
+  let totalAmount = 0;
+
+  const addAmount = (items, productList, priceKey) => {
+    for (const id in items) {
+      const product = productList.find((p) => p._id == id);
+      if (product && items[id] > 0) {
+        totalAmount += getItemPrice(product, priceKey) * items[id];
+      }
+    }
+  };
+
+  if (type === "all" || type === "regular") {
+    addAmount(cardItems, products, "regular");
+  }
+  if (type === "all" || type === "action") {
+    addAmount(actionCardItems, actionProducts, "action");
+  }
+
+  return Math.floor(totalAmount * 100) / 100;
+};
+
+
+
     const value = {
     navigate,
     user,
@@ -105,6 +154,8 @@ export const AppContextProvider = ({ children }) => {
     addToCart,
     updateCartItem,
     removeFromCart,
+    getCartCount,
+    getCartAmount,
     }
 
     return <AppContext.Provider value={value} >
