@@ -10,6 +10,7 @@ import Angebote from './pages/Angebote'
 import CategoryProducts from './pages/CategoryProducts'
 import ActionProductDetails from './pages/ActionProductDetails'
 import ProductDetails from './pages/ProductDetails'
+import Cart from './pages/Cart'
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route  path='/deals/:category' element={<CategoryProducts/>}/>
             <Route  path='/products/:category/:id' element={<ProductDetails />}/>
             <Route  path='/deals/:category/:id' element={<ActionProductDetails />}/>
+            <Route  path='/cart' element={<Cart/>}/>
           </Routes>
         </div>
        {!isSellerPath && <Footer />}

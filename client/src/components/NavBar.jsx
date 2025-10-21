@@ -5,8 +5,7 @@ import { useAppContext } from '../context/AppContext'
 
 const NavBar = () => {
     const [open, setOpen] = React.useState(false)
-    const { user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery, getCartCount,
-    getCartAmount, getCartActionCount, getCartActionAmount } = useAppContext()
+    const { user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery, getCartCount} = useAppContext()
 
     const logout = async () => {
         setUser(null);

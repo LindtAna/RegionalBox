@@ -9,6 +9,7 @@ import { allProducts } from "../assets/collections/productsList";
 //Provides information about the current user, their seller role, and navigation functionality.
 // Kontext zur Verwaltung des Benutzerzustands und der Navigation
 // Enthält Informationen über den aktuellen Benutzer, seine Verkäuferrolle sowie Navigationsfunktionen
+
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
@@ -26,6 +27,8 @@ export const AppContextProvider = ({ children }) => {
     const [cardItems, setCardItems] = useState({})
 
     const [searchQuery, setSearchQuery] = useState("")
+
+    const [cartArray, setCartArray] = useState([])
 
    //Fetch alle Produkte
   const fetchActionProducts = async () => setActionProducts(angebote);
@@ -128,6 +131,30 @@ const getCartAmount = (type = "all") => {
 };
 
 
+// Zählt die Artikel im Einkaufswagen
+
+const getOrder = () => {
+  let tempArray = [];
+
+  // Hilfsfunktion zum Hinzufügen von Artikeln zu tempArray
+  const addItemsToArray = (items, productList, type) => {
+    for (const key in items) {
+      const product = productList.find((item) => item._id === key);
+      if (product) {
+        const productCopy = { ...product, quantity: items[key], type };
+        tempArray.push(productCopy);
+      }
+    }
+  };
+
+  
+  addItemsToArray(cardItems, products, "regular");
+  addItemsToArray(actionCardItems, actionProducts, "action");
+
+  setCartArray(tempArray);
+};
+
+
 
     const value = {
     navigate,
@@ -150,12 +177,15 @@ const getCartAmount = (type = "all") => {
     setCardItems,
     actionCardItems,
     setActionCardItems,
+    cartArray, 
+    setCartArray,
 
     addToCart,
     updateCartItem,
     removeFromCart,
     getCartCount,
     getCartAmount,
+    getOrder,
     }
 
     return <AppContext.Provider value={value} >
