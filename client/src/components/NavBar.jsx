@@ -66,7 +66,7 @@ const NavBar = () => {
                             <img src={assets.profile_icon} className='w-10' alt='profile' />
                             <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border
                      border-dark-green  py-2.5 w-30 rounded-md text-sm z-40'>
-                                <li onClick={() => navigate('orders')} className='p-1.5 hover:bg-primary-dull/10 cursor-pointer'>Einkaufswagen</li>
+                                <li onClick={() => navigate('orders')} className='p-1.5 hover:bg-primary-dull/10 cursor-pointer'>Bestellungen</li>
                                 <li onClick={logout} className='p-1.5 hover:bg-primary-dull/10 cursor-pointer'>Abmelden</li>
                             </ul>
                         </div>

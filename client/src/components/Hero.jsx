@@ -62,7 +62,7 @@ const Hero = () => {
                             Jetzt einkaufen
                             <img
                                 className='md:hidden transition group-focus:translate-x-1'
-                                src={assets.white_arrow_icon}
+                                src={assets.arrow_white_icon}
                                 alt=''
                             />
                         </Link>

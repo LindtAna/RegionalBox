@@ -12,6 +12,7 @@ import ActionProductDetails from './pages/ActionProductDetails'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
 import AddAddress from './pages/AddAddress'
+import Orders from './pages/Orders'
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
             <Route  path='/deals/:category/:id' element={<ActionProductDetails />}/>
             <Route  path='/cart' element={<Cart/>}/>
             <Route  path='/add-address' element={<AddAddress/>}/>
+            <Route  path='/orders' element={<Orders/>}/>
           </Routes>
         </div>
        {!isSellerPath && <Footer />}
