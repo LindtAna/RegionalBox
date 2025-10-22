@@ -26,7 +26,7 @@ import main_banner_bg from "./main_banner_bg.png";
 import main_banner_bg_sm from "./main_banner_bg_sm.png";
 import bottom_banner_image from "./bottom_banner_image.png";
 import bottom_banner_image_sm from "./bottom_banner_image_sm.png";
-import add_address_iamge from "./add_address_image.svg";
+import add_address_image from "./add_address_image.svg";
 import maggi_oats_image from "./maggi_oats_image.png";
 import taschki_pelmeni_image from "./pelmeni.png";
 import blaubeersaft_image from "./blaubeersaft_image.png";
@@ -60,7 +60,7 @@ export const assets = {
   main_banner_bg_sm,
   bottom_banner_image,
   bottom_banner_image_sm,
-  add_address_iamge,
+  add_address_image,
   box_icon,
   blaubeersaft_image,
   plus_icon,
@@ -130,7 +130,6 @@ export const dummyAddress = [
     email: "ericamusterfrau@gmail.com",
     street: "Musterstr 123",
     city: "Mein Stadt",
-    state: "NRW",
     zipcode: 123456,
     country: "DE",
     phone: "1234567890",

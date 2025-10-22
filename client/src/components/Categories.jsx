@@ -20,14 +20,15 @@ const Categories = () => {
 
                 {categories.slice(0,7).map((category, index) => (
                     <div key={index} className='group cursor-pointer py-5 px-3 gap-2 
-                     rounded-lg flex flex-col justify-center items-center border-1 border-solid border-dark-green/20'
+                     rounded-lg flex flex-col justify-center items-center border-1 border-solid border-dark-green/20
+                     hover:border-dark-green/60'
                         style={{ backgroundColor: category.bgColor }}
                         onClick={() => {
                             navigate(`/products/${category.path.toLowerCase()}`)
                             scrollTo(0, 0)
                         }}>
                         <img src={category.image} alt={category.text}
-                            className='group-hover:scale-125 transition max-w-28' />
+                            className='group-hover:scale-125  transition max-w-28' />
                         <p className='text-sm font-medium'>{category.text}</p>
 
                     </div>

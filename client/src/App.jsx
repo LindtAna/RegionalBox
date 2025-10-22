@@ -11,6 +11,7 @@ import CategoryProducts from './pages/CategoryProducts'
 import ActionProductDetails from './pages/ActionProductDetails'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
+import AddAddress from './pages/AddAddress'
 
 const App = () => {
 
@@ -32,6 +33,7 @@ const App = () => {
             <Route  path='/products/:category/:id' element={<ProductDetails />}/>
             <Route  path='/deals/:category/:id' element={<ActionProductDetails />}/>
             <Route  path='/cart' element={<Cart/>}/>
+            <Route  path='/add-address' element={<AddAddress/>}/>
           </Routes>
         </div>
        {!isSellerPath && <Footer />}
