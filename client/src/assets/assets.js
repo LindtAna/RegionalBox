@@ -19,6 +19,7 @@ import arrow_left_icon from "./arrow-left-circle_icon.svg";
 import arrow_right_icon from "./arrow-right-circle_icon.svg";
 import deals_icon from "./deals.svg";
 import arrow_down_icon from "./arrow-down-icon.svg";
+import arrow_white_icon from "./arrow-white-icon.svg";
 
 
 import main_banner_bg from "./main_banner_bg.png";
@@ -29,6 +30,9 @@ import add_address_iamge from "./add_address_image.svg";
 import maggi_oats_image from "./maggi_oats_image.png";
 import taschki_pelmeni_image from "./pelmeni.png";
 import blaubeersaft_image from "./blaubeersaft_image.png";
+
+import banner_video from "./banner.mp4";
+import banner_video_sm from "./banner_sm.mp4";
 
 
 export const assets = {
@@ -50,6 +54,7 @@ export const assets = {
   arrow_left_icon,
   arrow_right_icon,
   deals_icon,
+  arrow_white_icon,
 
   main_banner_bg,
   main_banner_bg_sm,
@@ -60,6 +65,9 @@ export const assets = {
   blaubeersaft_image,
   plus_icon,
   arrow_down_icon,
+
+  banner_video,
+  banner_video_sm,
 };
 
 export const dummyProducts = [
