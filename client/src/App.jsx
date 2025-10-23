@@ -14,6 +14,7 @@ import Cart from './pages/Cart'
 import AddAddress from './pages/AddAddress'
 import Orders from './pages/Orders'
 import SellerLogin from './components/seller/SellerLogin'
+import SellerLayout from './pages/seller/SellerLayout'
 
 const App = () => {
 
@@ -21,7 +22,8 @@ const App = () => {
   const {showUserLogin, isSeller} = useAppContext()
 
   return (
-    <div>
+    <div className='text-default min-h-screen text-dark-green bg-white'>
+
         {isSellerPath ? null : <NavBar/> }
         {showUserLogin ? <LoginForm/> : null}
         <Toaster />
@@ -37,7 +39,7 @@ const App = () => {
             <Route  path='/cart' element={<Cart/>}/>
             <Route  path='/add-address' element={<AddAddress/>}/>
             <Route  path='/orders' element={<Orders/>}/>
-            <Route path='/seller' element={isSeller ? null : <SellerLogin/>}></Route>
+            <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}></Route>
           </Routes>
         </div>
        {!isSellerPath && <Footer />}
