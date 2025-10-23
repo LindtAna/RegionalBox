@@ -19,7 +19,6 @@ const Angebote = () => {
           .slice(0, 6).map((actionProduct, index) => (
             <ProdCardAction key={index} actionProduct={actionProduct} />
           ))}
-
       </div>
     </div>
   )

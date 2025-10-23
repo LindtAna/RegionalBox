@@ -10,7 +10,7 @@ const { currency, addToCart, removeFromCart, cardItems, navigate } = useAppConte
     return product && (
         <div onClick={() => {navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0)}} 
         className="border border-dark-green/20 rounded-md md:px-4 px-3 py-2
-         bg-white max-w-56 w-full">
+         bg-white max-w-56 w-full hover:border-dark-green/60 transition">
 
             <div className="group cursor-pointer flex items-center justify-center px-2">
                 <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" 
