@@ -24,7 +24,7 @@ const ActionProductDetails = () => {
     useEffect(() => {
         if (actionProducts.length > 0 && actionProduct) {
             const filtered = actionProducts.filter(
-                (item) => item.category === actionProduct.category && item._id !== actionProduct._id
+                (item) => actionProduct.category === item.category && item._id !== actionProduct._id
             );
             setRelatedActionProducts(filtered.slice(0, visibleCount));
         }

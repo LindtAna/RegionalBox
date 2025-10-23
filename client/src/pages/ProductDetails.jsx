@@ -16,6 +16,7 @@ const ProductDetails = () => {
     const [visibleCount, setVisibleCount] = useState(5);
 
     const product = products.find((item) => item._id === id);
+    
     const categoryData = categories.find(
   (cat) => cat.text.toLowerCase() === product.category.toLowerCase()
 );

@@ -21,3 +21,7 @@ font-family: "Outfit", sans-serif;
         grid-column: span 1;
     }
 }
+
+.no-scrollbar::-webkit-scrollbar{
+    display: none;
+}

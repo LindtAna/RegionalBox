@@ -8,8 +8,8 @@ const SellerLayout = () => {
 
     const sidebarLinks = [
         { name: "Produkt hunzufügen", path: "/seller", icon: assets.add_icon },
-        { name: "Produktliste", path: "/seller/product-list", icon: assets.product_list_icon},
-        { name: "Bestellungen", path: "/seller/orders", icon: assets.order_icon },
+        { name: "Produktliste", path: "/seller/products-list", icon: assets.product_list_icon},
+        { name: "Bestellungen", path: "/seller/orders-list", icon: assets.order_icon },
     ];
 
     const logout = async () => {
@@ -30,7 +30,7 @@ const SellerLayout = () => {
                 </div>
             </div>
             <div className="flex">
-            <div className="md:w-64 w-16 border-r h-[550px] text-base border-dark-green/30 pt-4 flex flex-col transition-all duration-300">
+            <div className="md:w-64 w-16 border-r  text-base border-dark-green/30 pt-4 flex flex-col transition-all duration-300">
                 {sidebarLinks.map((item) => (
                     <NavLink to={item.path} key={item.name} end={item.path === '/seller'}
                         className={({isActive}) => `flex items-center py-3 px-4 gap-3 
