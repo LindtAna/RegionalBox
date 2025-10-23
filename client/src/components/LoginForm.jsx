@@ -28,7 +28,7 @@ const LoginForm = () => {
             className="flex flex-col gap-4 m-auto items-center p-8 py-12 w-80 sm:w-[352px] text-black
             rounded-2xl shadow-xl border border-gray-200 bg-white">
                 <h1 className="text-2xl font-medium">
-                    <span className="text-indigo-500"></span> {state === "login" ? "Login" : "Konto erstellen"}
+                     {state === "login" ? "Login" : "Konto erstellen"}
                 </h1>
                 <p className="text-dark-green text-sm pb-3">
                     Bitte {state === "login" ? "melden Sie sich an" : "erstellen Sie ein Konto"}, um fortzufahren.
