@@ -85,10 +85,10 @@ const ActionProductDetails = () => {
                     </ul>
 
                     <div className="max-w-72 flex flex-col items-start mt-10 gap-4 text-base">
-                        <button onClick={() => { addToCart(actionProduct._id) }} className="w-full py-3.5 cursor-pointer font-medium bg-primary text-white hover:bg-dark-green transition rounded-full" >
+                        <button onClick={() => { addToCart(actionProduct._id, "action")}} className="w-full py-3.5 cursor-pointer font-medium bg-primary text-white hover:bg-dark-green transition rounded-full" >
                             In den Einkaufswagen
                         </button>
-                        <button onClick={() => { addToCart(actionProduct._id); navigate('/cart') }}
+                        <button onClick={() => { addToCart(actionProduct._id, "action"); navigate('/cart') }}
                             className="w-full py-3.5 cursor-pointer font-medium bg-emerald-600 text-white hover:bg-dark-green transition rounded-full" >
                             Jetzt kaufen
                         </button>
