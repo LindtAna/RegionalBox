@@ -26,11 +26,11 @@ const SellerLayout = () => {
                 </Link>
                 <div className="flex items-center gap-2 text-primary">
                     <p>Hallo Boss!</p>
-                    <button onClick={logout} className='border bg-primary hover:bg-dark-green rounded-full text-base text-white mx-5 px-5 py-1'>Logout</button>
+                    <button onClick={logout} className='border bg-primary hover:bg-dark-green rounded-full text-base text-white sm:mx-5 px-5 py-1'>Logout</button>
                 </div>
             </div>
             <div className="flex">
-            <div className="md:w-64 w-16 border-r  text-base border-dark-green/30 pt-4 flex flex-col transition-all duration-300">
+            <div className="md:w-64 w-16 border-r text-base border-dark-green/30 pt-4 flex flex-col">
                 {sidebarLinks.map((item) => (
                     <NavLink to={item.path} key={item.name} end={item.path === '/seller'}
                         className={({isActive}) => `flex items-center py-3 px-4 gap-3 
