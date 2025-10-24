@@ -11,7 +11,7 @@ import order_icon from "./order_icon.svg";
 import upload_area from "./upload_area.png";
 import profile_icon from "./profile_icon.png";
 import menu_icon from "./menu_icon.svg";
-import box_icon from "./box_icon.svg";
+import box_icon from "./box_icon.png";
 import black_arrow_icon from "./black_arrow_icon.svg";
 import white_arrow_icon from "./white_arrow_icon.svg";
 import plus_icon from "./plus_icon.svg";
@@ -146,7 +146,7 @@ export const dummyOrders = [
         _id: "in0pelm",
       },
     ],
-    amount: 89,
+    amount: 89.67,
     address: dummyAddress[0],
     status: "Platziert",
     paymentType: "Online Zahlung",
@@ -169,7 +169,7 @@ export const dummyOrders = [
         _id: "in05nood",
       },
     ],
-    amount: 43,
+    amount: 43.98,
     address: dummyAddress[0],
     status: "Platziert",
     paymentType: "Beim Kurier",

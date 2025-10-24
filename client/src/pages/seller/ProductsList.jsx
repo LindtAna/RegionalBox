@@ -32,7 +32,7 @@ const ProductsList = () => {
                                     </td>
                                     <td className="px-4 py-3 max-sm:hidden">{product.category}</td>
                                     <td className="px-4 py-3">{currency}{product.price}</td>
-                                    <td className="px-4 py-3">{currency}{product.offerPrice}</td>
+                                    <td className="px-4 py-3">{currency}{product.offerPrice || '0' }</td>
                                     <td className="px-4 py-3">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                                             <input type="checkbox" className="sr-only peer" />
