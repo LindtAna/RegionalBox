@@ -12,10 +12,10 @@ export const register = async (req, res) => {
                 .status(400)
                 .json({ success: false, message: "Erforderliche Angaben fehlen" });
 
-       
-  if (!validator.isEmail(email)) {
-    return res.status(400).json({ success: false, message: "Ungültige E-Mail-Adresse" });
-     } 
+
+        if (!validator.isEmail(email)) {
+            return res.status(400).json({ success: false, message: "Ungültige E-Mail-Adresse" });
+        }
 
         const existingUser = await User.findOne({ email });
         if (existingUser)
@@ -48,3 +48,46 @@ export const register = async (req, res) => {
         return res.status(500).json({ success: false, message: 'Interner Serverfehler' });
     }
 };
+
+
+//User Login: api/user/login
+
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        if (!email || !password) return res
+            .status(400)
+            .json({ success: false, message: "Email und Passwort sind erforderlich" });
+
+        const user = await User.findOne({ email });
+        if (!user) return res
+            .status(401)
+            .json({ success: false, message: "Ungültige Anmeldedaten" });
+
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) return res
+            .status(409)
+            .json({ success: false, message: "Ungültige Anmeldedaten" });
+
+        if (!process.env.JWT_SECRET) {
+            throw new Error("JWT_SECRET is not defined");
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        res.clearCookie("token");
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        return res.status(200).json({
+            success: true,
+            user: { email: user.email, name: user.name },
+        });
+    } catch (error) {
+        console.log(error.stack);
+        return res.status(500).json({ success: false, message: 'Interner Serverfehler' });
+    }
+}
