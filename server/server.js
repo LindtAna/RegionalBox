@@ -6,6 +6,7 @@ import 'dotenv/config';
 import userRouter from './routes/userRouter.js';
 import sellerRouter from './routes/sellerRouter.js';
 import cartRouter from './routes/cartRouter.js';
+import addressRouter from './routes/addressRouter.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -26,6 +27,7 @@ app.get('/', (req, res) => res.send('API is working'))
 app.use('/api/user', userRouter)
 app.use('/api/seller', sellerRouter)
 app.use('/api/cart', cartRouter)
+app.use('/api/address', addressRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
