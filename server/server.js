@@ -7,6 +7,7 @@ import userRouter from './routes/userRouter.js';
 import sellerRouter from './routes/sellerRouter.js';
 import cartRouter from './routes/cartRouter.js';
 import addressRouter from './routes/addressRouter.js';
+import ordersRouter from './routes/ordersRouter.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -28,6 +29,7 @@ app.use('/api/user', userRouter)
 app.use('/api/seller', sellerRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/address', addressRouter)
+app.use('/api/orders', ordersRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
