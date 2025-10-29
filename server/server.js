@@ -5,6 +5,7 @@ import connectDB from './configs/db.js';
 import 'dotenv/config';
 import userRouter from './routes/userRouter.js';
 import sellerRouter from './routes/sellerRouter.js';
+import cartRouter from './routes/cartRouter.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -24,6 +25,7 @@ app.use(cors({origin: allowedOrigins, credentials: true}))
 app.get('/', (req, res) => res.send('API is working'))
 app.use('/api/user', userRouter)
 app.use('/api/seller', sellerRouter)
+app.use('/api/cart', cartRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
