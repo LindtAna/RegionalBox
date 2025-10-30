@@ -5,7 +5,7 @@ import { useAppContext } from '../context/AppContext';
 
 const ProdCardAction = ({actionProduct}) => {
 
-const {currency, addToCart, removeFromCart, actionCardItems, navigate } = useAppContext()
+const {currency, addToCart, removeFromCart, actionCartItems, navigate } = useAppContext()
 
     return actionProduct && (
         <div onClick={() => {navigate(`/deals/${actionProduct.category.toLowerCase()}/${actionProduct._id}`); scrollTo(0,0)}} 
@@ -31,7 +31,7 @@ const {currency, addToCart, removeFromCart, actionCardItems, navigate } = useApp
                         </span> 
                     </div>
                     <div  onClick={(e) => {e.stopPropagation()}} className="text-dark-green flex-shrink-0">
-                        {!actionCardItems[actionProduct._id] ? (
+                        {!actionCartItems[actionProduct._id] ? (
                             <button className="flex items-center justify-center gap-1 sm:gap-3 bg-emerald-200/60
                             border border-emerald-200 
                             w-[64px] h-[34px] rounded cursor-pointer"
@@ -46,7 +46,7 @@ const {currency, addToCart, removeFromCart, actionCardItems, navigate } = useApp
                                 className="cursor-pointer text-md px-2 h-full" >
                                     -
                                 </button>
-                                <span className="w-5 text-center">{actionCardItems[actionProduct._id]}</span>
+                                <span className="w-5 text-center">{actionCartItems[actionProduct._id]}</span>
                                 <button  onClick={() => addToCart(actionProduct._id, "action")}
                                  className="cursor-pointer text-md px-2 h-full" >
                                     +

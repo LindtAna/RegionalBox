@@ -6,7 +6,7 @@ import { assets, dummyAddress } from "../assets/assets"
 const Cart = () => {
 
     // Daten über Produkte, den Warenkorb und Funktionen zum Arbeiten damit
-    const { products, actionProducts, currency, cardItems, actionCardItems,
+    const { products, actionProducts, currency, cartItems, actionCartItems,
         removeFromCart, getCartCount, getCartAmount, navigate, cartArray,
         getOrder } = useAppContext()
 
@@ -27,15 +27,15 @@ const Cart = () => {
     useEffect(() => {
         if (
             [...products, ...actionProducts].length > 0 &&
-            (Object.keys(cardItems).length > 0 || Object.keys(actionCardItems).length > 0)
+            (Object.keys(cartItems).length > 0 || Object.keys(actionCartItems).length > 0)
         ) {
             getOrder();
         }
-    }, [products, cardItems, actionProducts, actionCardItems]);
+    }, [products, cartItems, actionProducts, actionCartItems]);
 
     // Wenn Produkte vorhanden sind und der Warenkorb nicht leer ist — Inhalt des Warenkorbs anzeigen
     return all.length > 0 &&
-        (Object.keys(cardItems).length > 0 || Object.keys(actionCardItems).length > 0) ? (
+        (Object.keys(cartItems).length > 0 || Object.keys(actionCartItems).length > 0) ? (
         <div className="flex flex-col md:flex-row mt-16">
 
             {/* Linke Spalte: Liste der Produkte im Warenkorb */}

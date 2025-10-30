@@ -5,7 +5,7 @@ import { useAppContext } from '../context/AppContext';
 
 const ProductCard = ({product}) => {
 
-const { currency, addToCart, removeFromCart, cardItems, navigate } = useAppContext()
+const { currency, addToCart, removeFromCart, cartItems, navigate } = useAppContext()
 
     return product && (
         <div onClick={() => {navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0)}} 
@@ -33,7 +33,7 @@ const { currency, addToCart, removeFromCart, cardItems, navigate } = useAppConte
                     </div>
 
                     <div  onClick={(e) => {e.stopPropagation()}} className="text-dark-green flex-shrink-0">
-                        {!cardItems[product._id] ? (
+                        {!cartItems[product._id] ? (
                             <button className="flex items-center justify-center gap-1 sm:gap-3 bg-emerald-200/60
                             border border-emerald-200 w-[64px]
                             sm:w-[80px] h-[34px] rounded cursor-pointer"
@@ -48,7 +48,7 @@ const { currency, addToCart, removeFromCart, cardItems, navigate } = useAppConte
                                 className="cursor-pointer text-md px-2 h-full" >
                                     -
                                 </button>
-                                <span className="w-5 text-center">{cardItems[product._id]}</span>
+                                <span className="w-5 text-center">{cartItems[product._id]}</span>
                                 <button onClick={() => {addToCart(product._id)}}
                                  className="cursor-pointer text-md px-2 h-full" >
                                     +
