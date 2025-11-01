@@ -45,10 +45,17 @@ export const AppContextProvider = ({ children }) => {
   }
 
 
-  //Fetch alle Produkte
-  const fetchActionProducts = async () => setActionProducts(angebote);
+  //Fetch Angebote
+   const fetchActionProducts = async () => {
+    try{
+      const{data} = await axios.get('/api/action-product/list')
+      if(data.success){
+        setActionProducts(data.actionProducts)
+      }else toast.error(data.message)
+    }catch(error) { toast.error(error.message) }
+  }
 
-  // const fetchProducts = async () => setProducts(allProducts);
+  //Fetch regular Produkte
   const fetchProducts = async () => {
     try{
       const{data} = await axios.get('/api/product/list')
@@ -57,6 +64,7 @@ export const AppContextProvider = ({ children }) => {
       }else toast.error(data.message)
     }catch(error) { toast.error(error.message) }
   }
+
 
   useEffect(() => {
     fetchActionProducts();
@@ -214,6 +222,7 @@ export const AppContextProvider = ({ children }) => {
 
     axios,
     fetchProducts,
+    fetchActionProducts,
   }
 
   return <AppContext.Provider value={value} >

@@ -1,4 +1,3 @@
-// import tomato_image from "../tomato_image.png";
 import carrot_image from "../carrot_image.png";
 import apple_image from "../apple_image.png";
 import amul_milk_image from "../amul_milk_image.png";
