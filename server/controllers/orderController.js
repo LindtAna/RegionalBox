@@ -1,5 +1,6 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
+import Angebot from "../models/Angebot.js";
 
 // Place Order (Cash on Delivery): POST /api/orders/cod
 
@@ -14,8 +15,15 @@ export const placeOrderCOD = async (req, res) => {
 
         let amount = 0;
         for (const item of items) {
-            const product = await Product.findById(item.product);
-            amount += product.price * item.quantity;
+            let product = await Product.findById(item.product);
+            if (!product) {
+                product = await Angebot.findById(item.product);
+            }
+            if (!product) {
+                return res.status(400).json({ success: false, message: "Produkt nicht gefunden" });
+            }
+            const priceToUse = product.offerPrice || product.price;
+            amount += priceToUse * item.quantity;
         }
         await Order.create({
             userId,
@@ -41,14 +49,24 @@ export const getUserOrders = async (req, res) => {
         const { userId } = req.query
 
         const orders = await Order.find({
-            userId, 
+            userId,
             $or: [{ paymentType: "COD" }, { isPaid: true }]
-        }).populate('items.product address')
-        .sort({ createdAt: -1 })
+        }).sort({ createdAt: -1 })
+
+        const populatedOrders = [];
+        for (const order of orders) {
+            const populatedItems = [];
+            for (const item of order.items) {
+                let product = await Product.findById(item.product);
+                if (!product) product = await Angebot.findById(item.product);
+                populatedItems.push({ ...item.toObject(), product });
+            }
+            populatedOrders.push({ ...order.toObject(), items: populatedItems });
+        }
 
         return res
             .status(200)
-            .json({ success: true, orders });
+            .json({ success: true, orders: populatedOrders });
 
     } catch (error) {
         console.log(error.stack);
@@ -63,13 +81,22 @@ export const getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find({
             $or: [{ paymentType: "COD" }, { isPaid: true }]
-        })
-        .populate('items.product address')
-        .sort({ createdAt: -1 })
+        }).sort({ createdAt: -1 })
+
+        const populatedOrders = [];
+        for (const order of orders) {
+            const populatedItems = [];
+            for (const item of order.items) {
+                let product = await Product.findById(item.product);
+                if (!product) product = await Angebot.findById(item.product);
+                populatedItems.push({ ...item.toObject(), product });
+            }
+            populatedOrders.push({ ...order.toObject(), items: populatedItems });
+        }
 
         return res
             .status(200)
-            .json({ success: true, orders });
+            .json({ success: true, orders: populatedOrders});
 
     } catch (error) {
         console.log(error.stack);
