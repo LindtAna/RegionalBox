@@ -1,11 +1,22 @@
 import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const ProductsList = () => {
 
- const {products, actionProducts, currency} = useAppContext()
+    // const { products, actionProducts, currency, axios, fetchProducts } = useAppContext()
+    const { products, currency, axios, fetchProducts } = useAppContext()
 
- const all = [...actionProducts, ...products];
+    // const all = [...actionProducts, ...products];
 
+    const toggleStock = async (id, inStock) => {
+        try {
+            const { data } = await axios.patch('/api/product/stock', { id, inStock })
+            if (data.success) {
+                fetchProducts();
+                toast.success(data.message)
+            } else toast.error(data.message)
+        } catch (error) { toast.error(error.message) }
+    }
     return (
         <div className="flex-1 flex flex-col justify-between h-[95vh] overflow-y-scroll no-scrollbar">
             <div className="w-full md:p-10 p-4">
@@ -22,7 +33,7 @@ const ProductsList = () => {
                             </tr>
                         </thead>
                         <tbody className="text-sm text-black">
-                            {all.map((product) => (
+                            {products.map((product) => (
                                 <tr key={product._id} className="border-t border-dark-green/40">
                                     <td className="md:px-4 pl-2 md:pl-4 py-3 flex items-center space-x-3 truncate">
                                         <div className="border border-dark-green/40 rounded overflow-hidden">
@@ -32,12 +43,18 @@ const ProductsList = () => {
                                     </td>
                                     <td className="px-4 py-3 max-sm:hidden">{product.category}</td>
                                     <td className="px-4 py-3">{currency}{product.price}</td>
-                                    <td className="px-4 py-3">{currency}{product.offerPrice || '0' }</td>
+                                    <td className="px-4 py-3">{currency}{product.offerPrice || '0'}</td>
                                     <td className="px-4 py-3">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                                            <input type="checkbox" className="sr-only peer" />
-                                            <div className="w-12 h-7 bg-primary/20 border border-dark-green/40 rounded-full peer peer-checked:bg-dark-green transition-colors duration-200"></div>
-                                            <span className="dot absolute left-1 top-1 w-5 h-5 bg-white  border border-dark-green/40 rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
+                                            <input
+                                            onClick={() => toggleStock(product._id, !product.inStock)}
+                                            checked={product.inStock}
+                                            type="checkbox" className="sr-only peer" />
+                                            <div className="w-12 h-7 bg-primary/20 border border-dark-green/40
+                                            rounded-full peer peer-checked:bg-dark-green transition-colors duration-200"></div>
+                                            <span className="dot absolute left-1 top-1 w-5 h-5 bg-white 
+                                            border border-dark-green/40 rounded-full transition-transform
+                                            duration-200 ease-in-out peer-checked:translate-x-5"></span>
                                         </label>
                                     </td>
                                 </tr>
