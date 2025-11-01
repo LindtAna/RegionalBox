@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { assets } from '../../assets/assets';
 import { categories } from '../../assets/collections/categoriesList';
+import { useAppContext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
 
 export const AddProduct = () => {
-
+    const { axios } = useAppContext()
     const [files, setFiles] = useState([])
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -12,9 +14,35 @@ export const AddProduct = () => {
     const [offerPrice, setOfferPrice] = useState('')
 
     const onSubmitHandler = async (event) => {
-        event.preventDefault()
+        try {
+            event.preventDefault()
+            const productData = {
+                name,
+                description: description.split('\n'),
+                category,
+                price,
+                offerPrice
+            }
+
+            const formData = new FormData();
+            formData.append('productData', JSON.stringify(productData));
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i])
+            }
+
+            const{data} = await axios.post('/api/product/add', formData)
+            if(data.success){
+                toast.success(data.message)
+                setName('');
+                setDescription('');
+                setCategory('');
+                setPrice('');
+                setOfferPrice('');
+                setFiles([]);
+            }else toast.error(data.message)
+        } catch (error) { toast.error(error.message)}
     }
-    
+
 
     return (
         <div className="flex flex-col flex-1 h-[120vh] overflow-y-scroll justify-between no-scrollbar">
@@ -29,40 +57,40 @@ export const AddProduct = () => {
                                     const updatedFiles = [...files];
                                     updatedFiles[index] = e.target.files[0]
                                     setFiles(updatedFiles)
-                                }} 
-                                type="file" id={`image${index}`} hidden />
+                                }}
+                                    type="file" id={`image${index}`} hidden />
                                 <img className="max-w-50 cursor-pointer"
-                                src={files[index] ? URL.createObjectURL(files[index]) : assets.upload_area} 
-                                alt="uploadArea" width={150} height={150} />
+                                    src={files[index] ? URL.createObjectURL(files[index]) : assets.upload_area}
+                                    alt="uploadArea" width={150} height={150} />
                             </label>
                         ))}
                     </div>
                 </div>
                 <div className="flex flex-col gap-1 max-w-md">
                     <label className="text-base font-medium" htmlFor="product-name">Produktname</label>
-                    <input  
-                    onChange={(e) => setName(e.target.value)} value={name}
-                    id="product-name" type="text"
-                    placeholder="Hier eingeben"
-                    className="outline-none md:py-2.5 py-2 px-3 
+                    <input
+                        onChange={(e) => setName(e.target.value)} value={name}
+                        id="product-name" type="text"
+                        placeholder="Hier eingeben"
+                        className="outline-none md:py-2.5 py-2 px-3 
                     rounded border border-gray-500/40" required />
                 </div>
                 <div className="flex flex-col gap-1 max-w-md">
-                    <label className="text-base font-medium" 
-                    htmlFor="product-description">Produktbeschreibung</label>
+                    <label className="text-base font-medium"
+                        htmlFor="product-description">Produktbeschreibung</label>
                     <textarea onChange={(e) => setDescription(e.target.value)} value={description}
-                    id="product-description" rows={4}
-                     className="outline-none md:py-2.5 py-2 px-3 
+                        id="product-description" rows={4}
+                        className="outline-none md:py-2.5 py-2 px-3 
                      rounded border border-gray-500/40 resize-none"
-                      placeholder="Type here"></textarea>
+                        placeholder="Type here"></textarea>
                 </div>
                 <div className="w-full flex flex-col gap-1">
-                    <label className="text-base font-medium" 
-                    htmlFor="category">Kategorie</label>
+                    <label className="text-base font-medium"
+                        htmlFor="category">Kategorie</label>
 
                     <select onChange={(e) => setCategory(e.target.value)} value={category}
-                    id="category" 
-                    className="outline-none md:py-2.5 py-2 
+                        id="category"
+                        className="outline-none md:py-2.5 py-2 
                     px-3 rounded border border-gray-500/40">
                         <option value="">Kategorie auswählen</option>
                         {categories.map((item, index) => (
@@ -70,25 +98,25 @@ export const AddProduct = () => {
                                 {item.path}
                             </option>
                         ))}
-                        
+
                     </select>
                 </div>
                 <div className="flex items-center gap-5 flex-wrap">
                     <div className="flex-1 flex flex-col gap-1 w-32">
                         <label className="text-base font-medium" htmlFor="product-price">Produktpreis</label>
                         <input onChange={(e) => setPrice(e.target.value)} value={price}
-                        id="product-price"
-                        type="text"
-                        placeholder="0"
-                        className="outline-none md:py-2.5 py-2 px-3 
+                            id="product-price"
+                            type="text"
+                            placeholder="0"
+                            className="outline-none md:py-2.5 py-2 px-3 
                         rounded border border-gray-500/40" required />
                     </div>
                     <div className="flex-1 flex flex-col gap-1 w-32">
                         <label className="text-base font-medium" htmlFor="offer-price">Angebotspreis</label>
                         <input onChange={(e) => setOfferPrice(e.target.value)} value={offerPrice}
-                        id="offer-price" 
-                        type="text" placeholder="0" 
-                        className="outline-none md:py-2.5 py-2 px-3 rounded 
+                            id="offer-price"
+                            type="text" placeholder="0"
+                            className="outline-none md:py-2.5 py-2 px-3 rounded 
                         border border-gray-500/40" required />
                     </div>
                 </div>

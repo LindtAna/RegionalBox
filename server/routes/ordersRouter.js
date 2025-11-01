@@ -5,8 +5,8 @@ import { getAllOrders, getUserOrders, placeOrderCOD } from '../controllers/order
 
 const ordersRouter = express.Router();
 
-addressRouter.post('/cod', authUser, placeOrderCOD)
-addressRouter.get('/user', authUser, getUserOrders)
-addressRouter.get('/seller', authSeller, getAllOrders)
+ordersRouter.post('/cod', authUser, placeOrderCOD)
+ordersRouter.get('/user', authUser, getUserOrders)
+ordersRouter.get('/seller', authSeller, getAllOrders)
 
 export default ordersRouter

@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary"
-import Product from "../models/product"
+import Product from "../models/Product.js"
+import { connectCloudinary } from "../configs/cloudinary.js"; 
 
 // Add Product : api/product/add
 

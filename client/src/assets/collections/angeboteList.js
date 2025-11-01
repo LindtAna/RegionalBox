@@ -23,7 +23,7 @@ export const assetsAngebote = {
 
 export const angebote = [  
   {
-    _id: "1234qwert", 
+    _id: "1234qwefgfgjrt", 
     name: "Waldheidelbeersaft",
     volume: "0,7L",
     category: "Alkoholfreie Getränke",

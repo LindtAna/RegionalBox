@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema({
     address: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'address' },
     status: { 
         type: String, 
-        enum: ['Bestellung aufgegeben', 'In Bearbeitung', 'Versandt', 'Abgeschlossen'], 
+        enum: ['Bestellung aufgegeben', 'In Bearbeitung', 'Abgeschlossen'], 
         default: 'Bestellung aufgegeben' 
     },
     paymentType: { type: String, required: true },

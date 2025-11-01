@@ -72,7 +72,7 @@ export const assets = {
 
 export const dummyProducts = [
   {
-    _id: "1234qwert",
+    _id: "1234gjhjghqwert",
     name: "Waldheidelbeersaft",
     category: "Alkoholfreie Getränke",
     volume: "0,7L",

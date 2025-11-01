@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary"
 
-const connectCloudinary = async () => {
+export function connectCloudinary(){
 
     if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
         throw new Error("Cloudinary environment variables are not defined");
