@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext'
-import { categories } from '../assets/collections/categoriesList'
+import { categories } from '../assets/categories/categoriesList'
 import ProductCard from '../components/ProductCard'
 import ProdCardAction from '../components/ProdCardAction'
 

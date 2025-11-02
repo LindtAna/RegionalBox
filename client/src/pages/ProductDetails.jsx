@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from '../context/AppContext';
 import { Link, useParams } from "react-router-dom";
-import { categories } from "../assets/collections/categoriesList";
+import { categories } from "../assets/categories/categoriesList";
 import ProductCard from "../components/ProductCard";
 import { assets } from "../assets/assets";
 
@@ -72,8 +72,8 @@ const ProductDetails = () => {
                         <p className="md:text-xl text-base font-medium text-primary">{currency}{product.price}</p>
                     </div>
 
-                    <p className="text-base font-medium mt-6">About Product</p>
-                    <ul className="list-disc ml-4 text-gray-500/70">
+                    <p className="text-base font-medium mt-6">Produktdetails</p>
+                    <ul className="list-disc ml-4 text-dark-green/60">
                         {product.description.map((desc, index) => (
                             <li key={index}>{desc}</li>
                         ))}
