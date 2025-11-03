@@ -3,12 +3,15 @@ import User from "../models/User.js";
 // Update User Cart Data : /api/cart/update
 
 export const updateCart = async (req, res) => {
-     try{
-        const{userId, cartItems} = req.body
-        await User.findByIdAndUpdate(userId, {cartItems})
+    try {
+        const userId = req.user._id;
+        const { cartItems, actionCartItems } = req.body;
+
+        await User.findByIdAndUpdate(userId, { cartItems, actionCartItems });
+        
         return res
             .status(200)
-            .json({ success: true, message: "Einkaufswagen aktualisiert"});
+            .json({ success: true, message: "Einkaufswagen aktualisiert" });
 
     } catch (error) {
         console.log(error.stack);

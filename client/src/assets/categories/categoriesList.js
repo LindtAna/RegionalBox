@@ -29,7 +29,7 @@ export const categories = [
   },
   {
     text: "Alkoholfreie Getränke",
-    path: "Getränke",
+    path: "Alkoholfreie Getränke",
     image: bottles_image,
     bgColor: "#42D911"
   },
@@ -47,13 +47,13 @@ export const categories = [
   },
   {
     text: "Brot & Gebäck",
-    path: "Gebäck",
+    path: "Brot & Gebäck",
     image: bakery_image,
     bgColor: "#4C9A2A"
   },
   {
     text: "Cerealien & Getreide",
-    path: "Getreide",
+    path: "Cerealien & Getreide",
     image: grain_image,
     bgColor: "#0da156",
     borderColor: "#1b6b45"
@@ -65,20 +65,20 @@ export const categories = [
     bgColor: "#ACDF87"
   },
   {
-    text: "Fisch & Fleisch ",
-    path: "Fisch&Fleisch",
+    text: "Fisch & Fleisch",
+    path: "Fisch & Fleisch",
     image: fisch_fleisch_image,
     bgColor: "#adf55d"
   },
   {
     text: "Tiefkühlprodukte",
-    path: "Tiefkühlprodukte",
+    path: "Tiefkuehlprodukte",
     image: tiefkuehlprodukte_image,
     bgColor: "#42D911"
   },
   {
     text: "Champagner, Sekt & Wein",
-    path: "Alkohol",
+    path: "Champagner, Sekt & Wein",
     image: alkohol_image,
     bgColor: "#76BA1B"
   },

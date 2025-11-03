@@ -8,26 +8,25 @@ const CategoryProducts = () => {
   const { products, actionProducts } = useAppContext()
   const { category } = useParams()
 
+
+  // console.log("useParams category:", category);
+  // console.log("products from context:", products);
+  // console.log("actionProducts from context:", actionProducts);
+
   // Suche nach Kategorie
-  const searchCategory = categories.find(
-    (item) => item.path.toLowerCase() === category?.toLowerCase()
-  )
+ const searchCategory = categories.find(
+    (item) => item.path.toLowerCase() === category.toLowerCase()
+  );
 
-//   if (!searchCategory) {
-//     return (
-//       <div className='flex items-center justify-center h-[60vh]'>
-//         <p className='text-2xl font-medium text-primary'>Kategorie nicht gefunden</p>
-//       </div>
-//     )
-//   }
-
-  const categoryText = searchCategory.text
 
   // Filterung
-  const filteredActionProducts = actionProducts.filter((actionProduct) => actionProduct.category === categoryText
-  )
+ const filteredActionProducts = actionProducts.filter(
+    (p) => p.category.toLowerCase() === category.toLowerCase()
+  );
 
-  const filteredRegularProducts = products.filter((product) => product.category === categoryText)
+  const filteredRegularProducts = products.filter(
+    (p) => p.category.toLowerCase() === category.toLowerCase()
+  );
 
   // Zusammenführen in ein Array für Rendering
   const allFilteredProducts = [

@@ -20,7 +20,6 @@ const Categories = () => {
     )
   }
 
-  // текущие категории для отображения
   const visibleCategories = categories.slice(startIndex, startIndex + visibleCount)
     return (
 

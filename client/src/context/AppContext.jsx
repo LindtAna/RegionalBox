@@ -48,7 +48,7 @@ export const AppContextProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const { data } = await axios.get('/api/user/is-auth')
-      if (data.success){
+      if (data.success) {
         setUser(data.user)
         setCartItems(data.user.cartItems)
         setActionCartItems(data.user.actionCartItems)
@@ -60,23 +60,23 @@ export const AppContextProvider = ({ children }) => {
 
 
   //Fetch Angebote
-   const fetchActionProducts = async () => {
-    try{
-      const{data} = await axios.get('/api/action-product/list')
-      if(data.success){
+  const fetchActionProducts = async () => {
+    try {
+      const { data } = await axios.get('/api/action-product/list')
+      if (data.success) {
         setActionProducts(data.actionProducts)
-      }else toast.error(data.message)
-    }catch(error) { toast.error(error.message) }
+      } else toast.error(data.message)
+    } catch (error) { toast.error(error.message) }
   }
 
   //Fetch regular Produkte
   const fetchProducts = async () => {
-    try{
-      const{data} = await axios.get('/api/product/list')
-      if(data.success){
+    try {
+      const { data } = await axios.get('/api/product/list')
+      if (data.success) {
         setProducts(data.products)
-      }else toast.error(data.message)
-    }catch(error) { toast.error(error.message) }
+      } else toast.error(data.message)
+    } catch (error) { toast.error(error.message) }
   }
 
 
@@ -86,6 +86,26 @@ export const AppContextProvider = ({ children }) => {
     fetchSeller();
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    const updateCart = async () => {
+      try {
+         const { data } = await axios.post('/api/cart/update', {
+        cartItems,
+        actionCartItems,
+      });
+
+        if (!data.success) {
+          toast.error(data.message)
+        }
+      } catch (error) {
+        toast.error(error.message)
+      }
+    }
+    if  (user && user._id) {
+      updateCart()
+    }
+  }, [cartItems, actionCartItems])
 
 
   // Liefert die Warenkorbdaten je nach Produkttyp ("action" oder regulär)

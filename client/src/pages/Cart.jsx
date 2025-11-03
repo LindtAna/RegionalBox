@@ -52,8 +52,8 @@ const Cart = () => {
                 </div>
 
                 {/* Array der Produkte durchlaufen und jedes Produkt im Warenkorb rendern */}
-                {cartArray.map((product, index) => (
-                    <div key={index} className="grid grid-cols-[2fr_1fr_1fr] text-black items-center text-sm md:text-base font-medium pt-3">
+                {cartArray.map((product) => (
+                    <div key={product._id} className="grid grid-cols-[2fr_1fr_1fr] text-black items-center text-sm md:text-base font-medium pt-3">
                         <div className="flex items-center md:gap-6 gap-3">
                             <div
                                 onClick={() => {
