@@ -1,4 +1,4 @@
-import { useEffect, useInsertionEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppContext } from "../context/AppContext"
 import { assets } from "../assets/assets"
 import toast from "react-hot-toast"
@@ -8,8 +8,8 @@ const Cart = () => {
 
     // Daten über Produkte, den Warenkorb und Funktionen zum Arbeiten damit
     const { products, actionProducts, currency, cartItems, actionCartItems,
-        removeFromCart, getCartCount, getCartAmount, navigate, cartArray,
-        getOrder, axios, user } = useAppContext()
+        removeFromCart, getCartCount, getCartAmount, navigate, cartArray, setCartItems, setActionCartItems,
+        getOrder, axios, user, addresses } = useAppContext()
 
     // Lokale Zustände der Komponente
     const [address, setAddress] = useState([])
@@ -17,8 +17,31 @@ const Cart = () => {
     const [selectedAddress, setSelectedAddress] = useState(null)
     const [paymentOption, setPaymentOption] = useState('COD')
 
+    const placeOrder = async () => {
+        try {
 
-    const placeOrder = async () => { }
+            if (!selectedAddress) {
+                return toast.error('Bitte wählen Sie eine Adresse')
+            }
+            //COD Bestellung
+            if (paymentOption === "COD") {
+                const { data } = await axios.post('/api/orders/cod', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
+                    address: selectedAddress._id
+                });
+                if (data.success) {
+                    toast.success(data.message)
+                    setCartItems({})
+                    setActionCartItems({})
+                    navigate('/orders')
+                } else toast.error(data.message);
+            }
+        }
+        catch (error) {
+            toast.error(error.message);
+        }
+    }
 
     // Regular und Angebotsprodukte zusammenführen
     const all = [...products, ...actionProducts];
@@ -26,33 +49,47 @@ const Cart = () => {
     // Wird aufgerufen, wenn sich Produkte oder Warenkorb ändern
     // Aktualisiert das Warenkorb-Array mit der Anzahl jedes Produkts
     useEffect(() => {
-        if (
-            [...products, ...actionProducts].length > 0 &&
-            (Object.keys(cartItems).length > 0 || Object.keys(actionCartItems).length > 0)
-        ) {
+        if (products.length && actionProducts.length) {
             getOrder();
         }
-    }, [products, cartItems, actionProducts, actionCartItems]);
+    }, [cartItems, actionCartItems]);
+
 
     const getUserAddress = async () => {
         try {
-            const { data } = await axios.get('/api/address')
+            const { data } = await axios.get('/api/address');
             if (data.success) {
-                setAddress(data.addresses)
-                if (data.addresses.length > 0) {
-                    setSelectedAddress(data.addresses[0])
-                }
-            } else toast.error(data.message)
+                setAddress(data.addresses);
+
+                const savedAddress = localStorage.getItem('selectedAddress');
+
+                if (savedAddress) {
+                    const parsed = JSON.parse(savedAddress);
+                    const exists = data.addresses.find(addr => addr._id === parsed._id);
+                    if (exists) {
+                        setSelectedAddress(exists);
+
+                    } else { setSelectedAddress(data.addresses[0]); }
+
+                } else { setSelectedAddress(data.addresses[0]); }
+            } else toast.error(data.message);
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message);
+
         }
     }
 
     useEffect(() => {
         if (user) {
-            getUserAddress()
+            getUserAddress();
+            const savedAddress = localStorage.getItem('selectedAddress');
+            if (savedAddress) {
+                setSelectedAddress(JSON.parse(savedAddress));
+            }
         }
     }, [user])
+
+
 
     // Wenn Produkte vorhanden sind und der Warenkorb nicht leer ist — Inhalt des Warenkorbs anzeigen
     return all.length > 0 &&
@@ -148,6 +185,7 @@ const Cart = () => {
                                     <p key={addr._id}
                                         onClick={() => {
                                             setSelectedAddress(addr);
+                                            localStorage.setItem('selectedAddress', JSON.stringify(addr));
                                             setShowAddress(false);
                                         }}
                                         className="text-dark-green text-center hover:bg-gray-100">
