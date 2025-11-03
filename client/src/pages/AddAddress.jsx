@@ -1,9 +1,11 @@
-import  { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
+import { useAppContext } from '../context/AppContext'
+import toast from 'react-hot-toast'
 
 //Input Field Component
 
-const InputField = ({ type, placeholder, name, handleChange, address }) => (
+const InputField = ({ type, placeholder, name, handleChange, address, axios }) => (
     <input
         className='w-full px-2 py-2.5 border border-dark-green/20 rounded outline-none
     text-black focus:border-dark-green/60 transition'
@@ -17,6 +19,8 @@ const InputField = ({ type, placeholder, name, handleChange, address }) => (
 )
 
 const AddAddress = () => {
+
+    const { axios, user, navigate } = useAppContext()
 
     const [address, setAddress] = useState({
         firstName: '',
@@ -42,7 +46,23 @@ const AddAddress = () => {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
+        try {
+            const { data } = await axios.post('/api/address/add', address)
+
+            if (data.success) {
+                toast.success(data.message)
+                navigate('/cart')
+            } else { toast.error(data.message) }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/cart')
+        }
+    }, [])
 
 
     return (
@@ -104,15 +124,15 @@ const AddAddress = () => {
                             type='text'
                             placeholder='Land/Region' />
 
-                            <button className='w-full mt-6 bg-primary rounded-lg text-white py-3 hover:bg-dark-green
+                        <button className='w-full mt-6 bg-primary rounded-lg text-white py-3 hover:bg-dark-green
                             transiltion cursor-pointer uppercase'>
-                                Diese Adresse verwenden
-                            </button>
+                            Diese Adresse verwenden
+                        </button>
 
                     </form>
                 </div>
                 <img className='md:mr-36 mb-16 md:mt-0'
-                src={assets.add_address_image} alt='' />
+                    src={assets.add_address_image} alt='' />
             </div>
         </div>
     )

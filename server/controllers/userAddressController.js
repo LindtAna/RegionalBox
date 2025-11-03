@@ -3,7 +3,7 @@ import UserAddress from "../models/UserAddress.js";
 // Add User Address : /api/address/add
 export const addAddress = async (req, res) => {
      try{
-        const userId = req.user.userId; 
+        const userId = req.user._id;
         const addressData = req.body;
         await UserAddress.create({...addressData, userId})
         return res
@@ -21,7 +21,7 @@ export const addAddress = async (req, res) => {
 
 export const getAddress = async (req, res) => {
      try{
-        const userId = req.user.userId;
+        const userId = req.user._id;
         const addresses = await UserAddress.find({userId})
 
         if (!addresses.length) {

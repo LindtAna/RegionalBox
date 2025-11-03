@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useInsertionEffect, useState } from "react"
 import { useAppContext } from "../context/AppContext"
-import { assets, dummyAddress } from "../assets/assets"
+import { assets } from "../assets/assets"
+import toast from "react-hot-toast"
 
 
 const Cart = () => {
@@ -8,12 +9,12 @@ const Cart = () => {
     // Daten über Produkte, den Warenkorb und Funktionen zum Arbeiten damit
     const { products, actionProducts, currency, cartItems, actionCartItems,
         removeFromCart, getCartCount, getCartAmount, navigate, cartArray,
-        getOrder } = useAppContext()
+        getOrder, axios, user } = useAppContext()
 
     // Lokale Zustände der Komponente
-    const [address, setAddress] = useState(dummyAddress)
+    const [address, setAddress] = useState([])
     const [showAddress, setShowAddress] = useState(false)
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0])
+    const [selectedAddress, setSelectedAddress] = useState(null)
     const [paymentOption, setPaymentOption] = useState('COD')
 
 
@@ -32,6 +33,26 @@ const Cart = () => {
             getOrder();
         }
     }, [products, cartItems, actionProducts, actionCartItems]);
+
+    const getUserAddress = async () => {
+        try {
+            const { data } = await axios.get('/api/address')
+            if (data.success) {
+                setAddress(data.addresses)
+                if (data.addresses.length > 0) {
+                    setSelectedAddress(data.addresses[0])
+                }
+            } else toast.error(data.message)
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            getUserAddress()
+        }
+    }, [user])
 
     // Wenn Produkte vorhanden sind und der Warenkorb nicht leer ist — Inhalt des Warenkorbs anzeigen
     return all.length > 0 &&
@@ -123,11 +144,16 @@ const Cart = () => {
 
                         {showAddress && (
                             <div className="absolute top-12 py-1 px-2 bg-white rounded-lg border border-dark-green/20 text-sm w-full">
-                                {address.map((address, index) => (<p onClick={() => setShowAddress(false)}
-                                    className="text-dark-green text-center hover:bg-gray-100">
-                                    {address.street}, {address.city}, 
-                                     {address.country},
-                                </p>))}
+                                {address.map((addr) => (
+                                    <p key={addr._id}
+                                        onClick={() => {
+                                            setSelectedAddress(addr);
+                                            setShowAddress(false);
+                                        }}
+                                        className="text-dark-green text-center hover:bg-gray-100">
+                                        {addr.street}, {addr.city}, {addr.country}
+                                    </p>
+                                ))}
                                 <p onClick={() => navigate('/add-address')} className="text-primary text-center cursor-pointer p-2  hover:text-dark-green hover:bg-dark-green/10">
                                     Eine neue Lieferadresse hinzufügen
                                 </p>
