@@ -9,7 +9,7 @@ const Cart = () => {
     // Daten über Produkte, den Warenkorb und Funktionen zum Arbeiten damit
     const { products, actionProducts, currency, cartItems, actionCartItems,
         removeFromCart, getCartCount, getCartAmount, navigate, cartArray, setCartItems, setActionCartItems,
-        getOrder, axios, user, addresses } = useAppContext()
+        getOrder, axios, user} = useAppContext()
 
     // Lokale Zustände der Komponente
     const [address, setAddress] = useState([])
