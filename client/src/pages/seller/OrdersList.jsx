@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
-import { assets, dummyOrders } from "../../assets/assets";
+import { assets } from "../../assets/assets";
+import toast from "react-hot-toast";
 
 const OrdersList = () => {
     
-  const {currency} = useAppContext()
+  const {currency, axios} = useAppContext()
   const [ordersList, setOrdersList] = useState([])
 
   const fetchOrdersList = async () => {
-    setOrdersList(dummyOrders)
+    try {
+            const { data } = await axios.get('/api/orders/seller')
+
+            if (data.success) {
+              setOrdersList(data.orders)
+            } else { toast.error(data.message) }
+        } catch (error) {
+            toast.error(error.message)
+        }
   }
 
   useEffect(() => {
@@ -54,18 +63,18 @@ const OrdersList = () => {
                 {order.address.street}, {order.address.city}
               </p>
               <p>
-                {order.address.zipcode}, {order.address.country}
+                {order.address.postcode}, {order.address.country}
               </p>
               <p>{order.address.phone}</p>
             </div>
 
-            {/* 4️⃣ Сумма */}
+        
             <div className="md:w-[13%] flex sm:justify-center justify-start gap-4 items-center px-3 text-lg font-medium text-black/80 whitespace-nowrap">
               {currency}
-              {order.amount}
+              {order.amount.toFixed(2)}
             </div>
 
-            {/* 5️⃣ Доп. информация о заказе */}
+          
             <div className="md:w-[27%] px-3 text-sm break-words">
               <p>Zahlungsopt.: {order.paymentType}</p>
               <p>

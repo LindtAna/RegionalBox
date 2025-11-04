@@ -75,31 +75,49 @@ export const getUserOrders = async (req, res) => {
 }
 
 
-// get all orders for Seller/admin : /api/orders/seller
+// get all orders for Seller/admin : /api/seller/orders-list
 
 export const getAllOrders = async (req, res) => {
-    try {
-        const orders = await Order.find({
-            $or: [{ paymentType: "COD" }, { isPaid: true }]
-        }).sort({ createdAt: -1 })
+  try {
 
-        const populatedOrders = [];
-        for (const order of orders) {
-            const populatedItems = [];
-            for (const item of order.items) {
-                let product = await Product.findById(item.product);
-                if (!product) product = await Angebot.findById(item.product);
-                populatedItems.push({ ...item.toObject(), product });
-            }
-            populatedOrders.push({ ...order.toObject(), items: populatedItems });
-        }
+    const orders = await Order.find({
+      $or: [{ paymentType: "COD" }, { isPaid: true }]
+    })
+      .populate("address") 
+      .sort({ createdAt: -1 });
 
-        return res
-            .status(200)
-            .json({ success: true, orders: populatedOrders});
 
-    } catch (error) {
-        console.log(error.stack);
-        return res.status(500).json({ success: false, message: 'Interner Serverfehler' });
+    const populatedOrders = [];
+
+    for (const order of orders) {
+      const populatedItems = [];
+
+      for (const item of order.items) {
+
+        let product = await Product.findById(item.product);
+
+        if (!product) product = await Angebot.findById(item.product);
+
+        populatedItems.push({
+          ...item.toObject(),
+          product, 
+        });
+      }
+
+      populatedOrders.push({
+        ...order.toObject(),
+        items: populatedItems,
+      });
     }
-}
+
+    return res.status(200).json({
+      success: true,
+      orders: populatedOrders,
+    });
+  } catch (error) {
+    console.error(error.stack);
+    return res
+      .status(500)
+      .json({ success: false, message: "Interner Serverfehler" });
+  }
+};

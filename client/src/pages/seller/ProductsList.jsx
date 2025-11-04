@@ -42,7 +42,7 @@ const ProductsList = () => {
                                     <td className="px-4 py-3">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                                             <input
-                                            onClick={() => toggleStock(product._id, !product.inStock)}
+                                            onChange={() => toggleStock(product._id, !product.inStock)}
                                             checked={product.inStock}
                                             type="checkbox" className="sr-only peer" />
                                             <div className="w-12 h-7 bg-primary/20 border border-dark-green/40

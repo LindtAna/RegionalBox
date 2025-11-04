@@ -42,8 +42,8 @@ const NavBar = () => {
                 </NavLink>
 
                 {/* Desktop Menu */}
-                <div className="hidden sm:flex items-center gap-10 text-xl font-semibold">
-                    <NavLink to='/' className='hover:text-primary hover:transition-duration:200ms'>Home</NavLink>
+                <div className="hidden sm:flex items-center justify-center gap-10 text-xl font-semibold">
+                    <NavLink to='/' className='hover:text-primary hover:transition-duration:200ms'><img src={assets.home_icon}/></NavLink>
                     <NavLink to='/products' className='hover:text-primary hover:transition-duration:200ms'>Alle Produkte</NavLink>
                     <NavLink to='/deals' className='hover:text-primary hover:transition-duration:200ms flex'>Angebote
                         <img src={assets.deals_icon} />

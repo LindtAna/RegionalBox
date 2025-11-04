@@ -21,6 +21,8 @@ import deals_icon from "./deals.svg";
 import arrow_down_icon from "./arrow-down-icon.svg";
 import arrow_white_icon from "./arrow-white-icon.svg";
 import action_icon from "./action_list_icon.svg";
+import home_icon from "./home_icon.svg";
+
 
 import main_banner_bg from "./main_banner_bg.png";
 import main_banner_bg_sm from "./main_banner_bg_sm.png";
@@ -56,6 +58,7 @@ export const assets = {
   deals_icon,
   arrow_white_icon,
   action_icon,
+  home_icon,
 
   main_banner_bg,
   main_banner_bg_sm,
