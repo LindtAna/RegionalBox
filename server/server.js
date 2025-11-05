@@ -1,5 +1,5 @@
 import cookieParser from 'cookie-parser';
-import express from 'express';
+import express, { application } from 'express';
 import cors from 'cors';
 import connectDB from './configs/db.js';
 import 'dotenv/config';
@@ -11,6 +11,7 @@ import angebotRouter from './routes/angebotRouter.js';
 import cartRouter from './routes/cartRouter.js';
 import addressRouter from './routes/addressRouter.js';
 import ordersRouter from './routes/ordersRouter.js';
+import { stripeWebhooks } from './controllers/orderController.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -20,6 +21,8 @@ await connectDB()
 
 //Allow multuple origins
 const allowedOrigins = ['http://localhost:5173']
+
+app.post('/stripe', express.raw({type:'application/json'}), stripeWebhooks)
 
 //Middleware configuration
 app.use(express.json());

@@ -9,7 +9,7 @@ const Cart = () => {
     // Daten über Produkte, den Warenkorb und Funktionen zum Arbeiten damit
     const { products, actionProducts, currency, cartItems, actionCartItems,
         removeFromCart, getCartCount, getCartAmount, navigate, cartArray, setCartItems, setActionCartItems,
-        getOrder, axios, user} = useAppContext()
+        getOrder, axios, user } = useAppContext()
 
     // Lokale Zustände der Komponente
     const [address, setAddress] = useState([])
@@ -30,11 +30,24 @@ const Cart = () => {
                     items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
                     address: selectedAddress._id
                 });
+
                 if (data.success) {
                     toast.success(data.message)
                     setCartItems({})
                     setActionCartItems({})
                     navigate('/orders')
+                } else toast.error(data.message);
+            } else {
+                const { data } = await axios.post('/api/orders/stripe', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
+                    address: selectedAddress._id
+                });
+
+                if (data.success) {
+                    window.location.replace(data.url)
+                    setCartItems({})
+                    setActionCartItems({})
                 } else toast.error(data.message);
             }
         }

@@ -37,7 +37,10 @@ const Orders = () => {
                     <p className='flex justify-between md:items-center text-black md:font-medium
         max-md:flex-col md:text-end'>
                         <span>Bestellnr.: {order._id}</span>
-                        Zahlungsopt.: {order.paymentType === 'COD' ? 'Bargeld' : order.paymentType}
+                        Zahlungsopt.: {order.paymentType === 'COD' ? 'Bargeld'
+                            : order.paymentType === 'Online' ? 'Online Zahlung'
+                                : order.paymentType}
+
                         <span className='text-black'>Gesamtbetrag: {currency}{order.amount.toFixed(2)}</span>
 
                     </p>
@@ -53,22 +56,22 @@ const Orders = () => {
                                     <img src={item.product.image[0]}
                                         className='w-full h-full object-cover' />
                                 </div>
-                                </div>
-                                <div className="w-[32%] flex flex-col justify-start">
-                                    <h2 className='text-xl font-medium text-dark-green'>{item.product.name}</h2>
-                                    <p className='text-dark-green/60'>Kategorie: {item.product.category}</p>
-                                </div>
-                        
+                            </div>
+                            <div className="w-[32%] flex flex-col justify-start">
+                                <h2 className='text-xl font-medium text-dark-green'>{item.product.name}</h2>
+                                <p className='text-dark-green/60'>Kategorie: {item.product.category}</p>
+                            </div>
+
 
                             <div className="w-[30%] pl-4 flex flex-col gap-1.5 justify-center text-dark-green">
                                 <p>Stückz.: {item.quantity || '1'}</p>
                                 <p>Bestellstatus: {order.status}</p>
                                 <p>Datum: {new Date(order.createdAt).toLocaleDateString()}</p>
                             </div>
-                          <div className="w-[30%] pl-4 flex items-center justify-start">  
-                            <p className='text-dark-green text-lg font-medium'
-                            >Zwischensumme: {currency}{(item.product.price * item.quantity).toFixed(2)}</p>
-                             </div>
+                            <div className="w-[30%] pl-4 flex items-center justify-start">
+                                <p className='text-dark-green text-lg font-medium'
+                                >Zwischensumme: {currency}{(item.product.price * item.quantity).toFixed(2)}</p>
+                            </div>
 
                         </div>
                     ))}
