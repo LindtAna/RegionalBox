@@ -76,6 +76,7 @@ const ActionProductDetails = () => {
                         <p className="text-dark-green line-through">{currency}{actionProduct.price}</p>
                         <p className="text-2xl font-medium text-primary">{currency}{actionProduct.offerPrice}</p>
                     </div>
+                    <p className="text-gray-700 mt-3">{actionProduct.volume}</p>
 
                     <p className="text-base font-medium mt-6">Produktdetails</p>
                     <ul className="list-disc ml-4 text-dark-green/60">

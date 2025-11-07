@@ -77,8 +77,8 @@ export const categories = [
     bgColor: "#42D911"
   },
   {
-    text: "Champagner, Sekt & Wein",
-    path: "Champagner, Sekt & Wein",
+    text: "Champagner & Wein",
+    path: "Champagner & Wein",
     image: alkohol_image,
     bgColor: "#76BA1B"
   },

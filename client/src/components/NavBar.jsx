@@ -43,6 +43,9 @@ const NavBar = () => {
 
                 {/* Desktop Menu */}
                 <div className="hidden sm:flex items-center justify-center gap-10 text-xl font-semibold">
+                    <button onClick={() => navigate('/seller')}
+                    class="border border-dark-green/30 px-3 py-1 text-dark-green/50
+                    rounded-full text-xs cursor-pointer opacity-80">Verkäufer-Dashboard</button>
                     <NavLink to='/' className='hover:text-primary hover:transition-duration:200ms'><img src={assets.home_icon}/></NavLink>
                     <NavLink to='/products' className='hover:text-primary hover:transition-duration:200ms'>Alle Produkte</NavLink>
                     <NavLink to='/deals' className='hover:text-primary hover:transition-duration:200ms flex'>Angebote
