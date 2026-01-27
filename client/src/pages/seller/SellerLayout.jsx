@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const SellerLayout = () => {
 
-    const { navigate, axios } = useAppContext()
+    const { navigate, axios, isDemoSeller } = useAppContext()
 
     const sidebarLinks = [
         { name: "Produkt hinzufügen", path: "/seller", icon: assets.add_icon },
@@ -37,7 +37,7 @@ const SellerLayout = () => {
                         className="w-34 md:w-38 cursor-pointer" />
                 </Link>
                 <div className="flex items-center gap-2 text-primary">
-                    <p>Hallo Boss!</p>
+                    <p>Hallo {isDemoSeller ? 'Demo-Boss' : 'Boss'}!</p> 
                     <button onClick={logout} className='border bg-primary hover:bg-dark-green rounded-full text-base text-white sm:mx-5 px-5 py-1'>Logout</button>
                 </div>
             </div>

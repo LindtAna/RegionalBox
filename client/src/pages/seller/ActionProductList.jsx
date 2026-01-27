@@ -3,10 +3,16 @@ import toast from "react-hot-toast";
 
 const ActionProductsList = () => {
 
-    const { actionProducts, currency, axios, fetchActionProducts } = useAppContext()
+    const { actionProducts, currency, axios, fetchActionProducts, isDemoSeller } = useAppContext()
 
 
     const toggleStock = async (id, inStock) => {
+
+         if (isDemoSeller) { 
+            toast.error("Demo-Modus: Änderungen nicht erlaubt");
+            return;
+        }
+        
         try {
             const { data } = await axios.patch('/api/action-product/stock', { id, inStock })
             if (data.success) {
@@ -16,7 +22,12 @@ const ActionProductsList = () => {
         } catch (error) { toast.error(error.message) }
     }
 
-    const toggleHighlight = async (id, currentValue) => {
+    const toggleHighlight = async(id, currentValue) => {
+         if (isDemoSeller) {  
+            toast.error("Demo-Modus: Änderungen nicht erlaubt");
+            return;
+        }
+
         try {
             const { data } = await axios.patch('/api/action-product/highlight', {
                 id,

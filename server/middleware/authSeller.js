@@ -8,8 +8,17 @@ const authSeller = async (req, res, next) => {
 
     try {
         const decodedToken = jwt.verify(sellerToken, process.env.JWT_SECRET)
-        if (decodedToken.email === process.env.SELLER_EMAIL) {
-            next();
+
+         const isSeller = decodedToken.email === process.env.SELLER_EMAIL;
+         const isDemoSeller = decodedToken.email === process.env.SELLER_DEMO_EMAIL;
+
+
+          if (isSeller || isDemoSeller) {
+            req.seller = {
+                email: decodedToken.email,
+                isDemoSeller: decodedToken.isDemoSeller || false
+            }
+            next()
         } else {
             return res
                 .status(401)

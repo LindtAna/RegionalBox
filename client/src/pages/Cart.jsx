@@ -65,7 +65,7 @@ const Cart = () => {
         if (products.length && actionProducts.length) {
             getOrder();
         }
-    }, [cartItems, actionCartItems]);
+    }, [products, actionProducts, cartItems, actionCartItems]);
 
 
     const getUserAddress = async () => {
@@ -74,6 +74,9 @@ const Cart = () => {
             if (data.success) {
                 setAddress(data.addresses);
 
+                if (data.addresses.length === 0) {
+                    return;
+                }
                 const savedAddress = localStorage.getItem('selectedAddress');
 
                 if (savedAddress) {
@@ -87,7 +90,9 @@ const Cart = () => {
                 } else { setSelectedAddress(data.addresses[0]); }
             } else toast.error(data.message);
         } catch (error) {
-            toast.error(error.message);
+            if (error.response?.status !== 404) {
+                toast.error(error.message);
+            }
 
         }
     }
@@ -102,11 +107,27 @@ const Cart = () => {
         }
     }, [user])
 
+    const hasItemsInCart = Object.keys(cartItems).length > 0 ||
+        Object.keys(actionCartItems).length > 0;
+
+
+    const productsLoaded = products.length > 0 && actionProducts.length > 0;
+
+
+    if (hasItemsInCart && !productsLoaded) {
+        return (
+            <div className='flex justify-center items-center min-h-[60vh]'>
+                <div className='animate-spin rounded-full h-16 w-16 border-4
+                border-primary border-t-dark-green'></div>
+            </div>
+        );
+    }
+
+
 
 
     // Wenn Produkte vorhanden sind und der Warenkorb nicht leer ist — Inhalt des Warenkorbs anzeigen
-    return all.length > 0 &&
-        (Object.keys(cartItems).length > 0 || Object.keys(actionCartItems).length > 0) ? (
+    return cartArray.length > 0 ? (
         <div className="flex flex-col md:flex-row mt-16">
 
             {/* Linke Spalte: Liste der Produkte im Warenkorb */}

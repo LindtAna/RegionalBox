@@ -4,9 +4,9 @@ import toast from 'react-hot-toast'
 
 
 const SellerLogin = () => {
-    const { isSeller, setIsSeller, navigate, axios } = useAppContext()
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const { isSeller, setIsSeller, setIsDemoSeller, navigate, axios } = useAppContext()
+    const [email, setEmail] = useState("admin-demo@regionalbox.de")
+    const [password, setPassword] = useState("demo123")
 
     useEffect(() => {
         if (isSeller) navigate('/seller')
@@ -18,6 +18,7 @@ const SellerLogin = () => {
             const { data } = await axios.post('/api/seller/login', { email, password })
             if (data.success) {
                 setIsSeller(true)
+                setIsDemoSeller(data.IsDemoSeller)
                 navigate('/seller')
             } else {
                 toast.error(data.message)
@@ -61,6 +62,11 @@ const SellerLogin = () => {
                 <button className="bg-primary hover:bg-dark-green transition-all text-white w-full py-2 rounded-full cursor-pointer">
                     Einloggen
                 </button>
+
+                <p className="text-xs text-dark-green text-center mt-2">
+                    Demo-Zugang ist bereits ausgefüllt.<br />
+                    Ändern Sie die Daten für echten Zugriff.
+                </p>
             </div>
         </form>
     )

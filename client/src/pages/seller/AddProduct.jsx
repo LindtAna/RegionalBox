@@ -5,7 +5,7 @@ import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 
 export const AddProduct = () => {
-    const { axios } = useAppContext()
+    const { axios, isDemoSeller } = useAppContext()
     const [files, setFiles] = useState([])
     const [productType, setProductType] = useState('Standart')
     const [name, setName] = useState('')
@@ -81,6 +81,14 @@ export const AddProduct = () => {
      return (
         <div className="flex flex-col flex-1 h-[120vh] overflow-y-scroll justify-between no-scrollbar">
             <form onSubmit={onSubmitHandler} className="md:p-10 p-1 space-y-3 max-w-lg">
+
+                {isDemoSeller && (
+                    <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded mb-4">
+                        <p className="text-sm font-medium">
+                            ⚠️ Demo-Modus: das Hochladen eines Bildes und das Eingeben einer Beschreibung ist möglich, jedoch können keine Produkte hinzugefügt werden.
+                        </p>
+                    </div>
+                )}
                 <div>
                     <div className="mt-1 max-w-[45%]">
                         <select
@@ -184,7 +192,10 @@ export const AddProduct = () => {
                     )}
                 </div>
 
-                <button className="px-8 py-2.5 bg-primary hover:bg-dark-green
+                <button
+                type='submit'
+                disabled={isDemoSeller}
+                className="px-8 py-2.5 bg-primary hover:bg-dark-green
                  text-white font-medium rounded-lg cursor-pointer">Hinzufügen</button>
             </form>
         </div>
