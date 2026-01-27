@@ -24,9 +24,9 @@ export const getAddress = async (req, res) => {
         const userId = req.user._id;
         const addresses = await UserAddress.find({userId})
 
-        if (!addresses.length) {
-      return res.status(404).json({ success: false, message: "Keine Lieferadressen gefunden" });
-    }
+    //     if (!addresses.length) {
+    //   return res.status(404).json({ success: false, message: "Keine Lieferadressen gefunden" });
+    // }
     
         return res
             .status(200)
