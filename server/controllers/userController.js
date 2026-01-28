@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import validator from "validator";
-// import { generateToken, setTokenCookie } from "../utils/jwt.js";
 import jwt from "jsonwebtoken";
+import { generateToken } from "../utils/token.js";
 
 //User Registration : /api/user/register
 export const register = async (req, res) => {
@@ -31,7 +31,8 @@ export const register = async (req, res) => {
         // const token = generateToken(user._id);
         // setTokenCookie(res, token);
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
+        // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
+        const token = generateToken({ id: user._id });
 
         res.cookie('token', token, {
             httpOnly: true,
@@ -42,6 +43,7 @@ export const register = async (req, res) => {
 
         return res.status(201).json({
             success: true,
+            token,
             user: { email: user.email, name: user.name },
         });
     } catch (error) {
@@ -79,6 +81,7 @@ export const login = async (req, res) => {
         
         return res.status(200).json({
             success: true,
+            token,
             user: { email: user.email, name: user.name },
         });
     } catch (error) {
@@ -107,11 +110,11 @@ export const isAuth = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        res.clearCookie("token", {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-        });
+        // res.clearCookie("token", {
+        //     httpOnly: true,
+        //     secure: true,
+        //     sameSite: "none",
+        // });
         return res.status(200).json({ success: true, message: 'Abgemeldet' });
 
     } catch (error) {

@@ -6,6 +6,26 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
+axios.interceptors.request.use(
+  (config) => {
+    const userToken = localStorage.getItem('userToken');
+    const sellerToken = localStorage.getItem('sellerToken');
+
+    if (config.url.includes('/api/seller/') && sellerToken) {
+      config.headers.Authorization = `Bearer ${sellerToken}`;
+    } else if (config.url.includes('/api/user/') || config.url.includes('/api/cart/') || 
+               config.url.includes('/api/address/') || config.url.includes('/api/orders/')) {
+      if (userToken) {
+        config.headers.Authorization = `Bearer ${userToken}`;
+      }
+    }
+    
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+
 //Context for managing user state and navigation.
 //Provides information about the current user, their seller role, and navigation functionality.
 // Kontext zur Verwaltung des Benutzerzustands und der Navigation
@@ -36,6 +56,12 @@ export const AppContextProvider = ({ children }) => {
   //Fetch Verkaufer Status
   const fetchSeller = async () => {
     try {
+      const sellerToken = localStorage.getItem('sellerToken');
+      if (!sellerToken) {
+        setIsSeller(false);
+        setIsDemoSeller(false);
+        return;
+      }
       const { data } = await axios.get('/api/seller/is-auth')
       if (data.success){
         setIsSeller(true)
@@ -43,24 +69,35 @@ export const AppContextProvider = ({ children }) => {
       } else {
         setIsSeller(false)
         setIsDemoSeller(false)
+        localStorage.removeItem('sellerToken');
       }
     } catch (error) {
       setIsSeller(false)
       setIsDemoSeller(false)
+      localStorage.removeItem('sellerToken');
     }
   }
 
   //Fetch User Auth Status, User Data und Cart Items
   const fetchUser = async () => {
     try {
+       const userToken = localStorage.getItem('userToken');
+      if (!userToken) {
+        setUser(null);
+        return;
+      }
       const { data } = await axios.get('/api/user/is-auth')
       if (data.success) {
         setUser(data.user)
         setCartItems(data.user.cartItems)
         setActionCartItems(data.user.actionCartItems)
+      } else {
+        setUser(null);
+        localStorage.removeItem('userToken');
       }
     } catch (error) {
       setUser(null)
+      localStorage.removeItem('userToken');
     }
   }
 

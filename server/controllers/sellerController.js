@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { generateToken } from "../utils/token.js";
 
 // Überprüfung der Umgebungsvariablen 
 const validateEnv = () => {
@@ -35,18 +36,18 @@ export const sellerLogin = async (req, res) => {
         }
 
         if (isSeller) {
-            const token = jwt.sign({ email, isDemoSeller }, process.env.JWT_SECRET, { expiresIn: "7d" });
+             const token = generateToken({ email, isDemoSeller });
 
-            res.cookie("sellerToken", token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "none",
-                maxAge: 7 * 24 * 60 * 60 * 1000,
-            });
+            // res.cookie("sellerToken", token, {
+            //     httpOnly: true,
+            //     secure: true,
+            //     sameSite: "none",
+            //     maxAge: 7 * 24 * 60 * 60 * 1000,
+            // });
 
             return res
                 .status(200)
-                .json({ success: true, message: "Angemeldet", isDemoSeller });
+                .json({ success: true, message: "Angemeldet", token, isDemoSeller });
         } else {
             return res.status(401).json({ success: false, message: "Ungültige Anmeldedaten" });
         }

@@ -1,13 +1,23 @@
 import jwt from "jsonwebtoken";
+import { verifyToken } from "../utils/token.js";
 
 const authSeller = async (req, res, next) => {
-    const { sellerToken } = req.cookies;
-    if (!sellerToken) return res
+    // const { sellerToken } = req.cookies;
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.startsWith('Bearer ') 
+        ? authHeader.substring(7) 
+        : null;
+
+    if (!token) return res
         .status(401)
         .json({ success: false, message: "Nicht autorisiert" });
 
     try {
-        const tokenDecode = jwt.verify(sellerToken, process.env.JWT_SECRET)
+        const tokenDecode = verifyToken(token);
+
+        if (!tokenDecode) {
+            return res.status(401).json({ success: false, message: "Ungültiger Token" });
+        }
 
         const isSeller = tokenDecode.email === process.env.SELLER_EMAIL;
         const isDemoSeller = tokenDecode.email === process.env.SELLER_DEMO_EMAIL;

@@ -1,15 +1,23 @@
 import jwt from "jsonwebtoken";
+import { verifyToken } from "../utils/token.js";
 
 const authUser = async (req, res, next) => {
-    const { token } = req.cookies;
+// const { token } = req.cookies;
+const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.startsWith('Bearer ') 
+        ? authHeader.substring(7) 
+        : null;
     if (!token) return res
         .status(401)
         .json({ success: false, message: "Nicht autorisiert" });
 
     try {
-        const tokenDecode = jwt.verify(token, process.env.JWT_SECRET)
-        if (tokenDecode.id) {
-            req.body.userId = tokenDecode.id
+        // const tokenDecode = jwt.verify(token, process.env.JWT_SECRET)
+        const tokenDecode = verifyToken(token);
+
+        if (tokenDecode && tokenDecode.id) {
+            req.user = { _id: tokenDecode.id };
+            next();
         }
         else {
             return res
