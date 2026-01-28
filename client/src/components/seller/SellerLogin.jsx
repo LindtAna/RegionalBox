@@ -8,10 +8,6 @@ const SellerLogin = () => {
     const [email, setEmail] = useState("admin-demo@regionalbox.de")
     const [password, setPassword] = useState("demo123")
 
-    useEffect(() => {
-        if (isSeller) navigate('/seller')
-    }, [isSeller])
-
     const onSubmitHandler = async (event) => {
         try {
             event.preventDefault()
@@ -27,6 +23,10 @@ const SellerLogin = () => {
             toast.error(error.message)
         }
     }
+
+     useEffect(() => {
+        if (isSeller) navigate('/seller')
+    }, [isSeller])
 
     return !isSeller && (
         <form onSubmit={onSubmitHandler}

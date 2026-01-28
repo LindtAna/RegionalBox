@@ -17,6 +17,7 @@ export const AppContext = createContext();
 export const AppContextProvider = ({ children }) => {
 
   const currency = import.meta.env.VITE_CURRENCY;
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState(false)
@@ -30,9 +31,9 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState({})
 
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState({})
 
-  const [cartArray, setCartArray] = useState([])
+  const [cartArray, setCartArray] = useState({})
 
   //Fetch Verkaufer Status
   const fetchSeller = async () => {
@@ -40,7 +41,7 @@ export const AppContextProvider = ({ children }) => {
       const { data } = await axios.get('/api/seller/is-auth')
       if (data.success){
         setIsSeller(true)
-        setIsDemoSeller(data.isDemoSeller);
+        setIsDemoSeller(data.isDemoSeller)
       } else {
         setIsSeller(false)
         setIsDemoSeller(false)
@@ -59,8 +60,6 @@ export const AppContextProvider = ({ children }) => {
         setUser(data.user)
         setCartItems(data.user.cartItems)
         setActionCartItems(data.user.actionCartItems)
-      } else {
-        setUser(null);
       }
     } catch (error) {
       setUser(null)
@@ -87,34 +86,6 @@ export const AppContextProvider = ({ children }) => {
       } else toast.error(data.message)
     } catch (error) { toast.error(error.message) }
   }
-
-
-  useEffect(() => {
-    fetchActionProducts();
-    fetchProducts();
-    fetchSeller();
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    const updateCart = async () => {
-      try {
-         const { data } = await axios.post('/api/cart/update', {
-        cartItems,
-        actionCartItems,
-      });
-
-        if (!data.success) {
-          toast.error(data.message)
-        }
-      } catch (error) {
-        toast.error(error.message)
-      }
-    }
-    if  (user && user._id) {
-      updateCart()
-    }
-  }, [cartItems, actionCartItems])
 
 
   // Liefert die Warenkorbdaten je nach Produkttyp ("action" oder regulär)
@@ -231,7 +202,32 @@ export const AppContextProvider = ({ children }) => {
     setCartArray(tempArray);
   };
 
+  useEffect(() => {
+    fetchActionProducts();
+    fetchProducts();
+    fetchSeller();
+    fetchUser();
+  }, []);
 
+  useEffect(() => {
+    const updateCart = async () => {
+      try {
+         const { data } = await axios.post('/api/cart/update', {
+        cartItems,
+        actionCartItems,
+      });
+
+        if (!data.success) {
+          toast.error(data.message)
+        }
+      } catch (error) {
+        toast.error(error.message)
+      }
+    }
+    if  (user && user._id) {
+      updateCart()
+    }
+  }, [cartItems, actionCartItems])
 
   const value = {
     navigate,
