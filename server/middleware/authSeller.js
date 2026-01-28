@@ -2,11 +2,13 @@ import jwt from "jsonwebtoken";
 import { verifyToken } from "../utils/token.js";
 
 const authSeller = async (req, res, next) => {
-    // const { sellerToken } = req.cookies;
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.startsWith('Bearer ') 
-        ? authHeader.substring(7) 
+    const token = authHeader && authHeader.startsWith('Bearer ')
+        ? authHeader.substring(7)
         : null;
+
+    console.log('authSeller-Token:', token ? 'Exists' : 'Missing');
+    console.log('authSeller-Header:', authHeader);
 
     if (!token) return res
         .status(401)
@@ -21,6 +23,8 @@ const authSeller = async (req, res, next) => {
 
         const isSeller = tokenDecode.email === process.env.SELLER_EMAIL;
         const isDemoSeller = tokenDecode.email === process.env.SELLER_DEMO_EMAIL;
+
+          console.log('authSeller-isSeller:', isSeller, 'isDemoSeller:', isDemoSeller);
 
         if (isSeller || isDemoSeller) {
             req.seller = {
