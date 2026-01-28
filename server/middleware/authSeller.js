@@ -7,27 +7,26 @@ const authSeller = async (req, res, next) => {
         .json({ success: false, message: "Nicht autorisiert" });
 
     try {
-        const decodedToken = jwt.verify(sellerToken, process.env.JWT_SECRET)
+        const tokenDecode = jwt.verify(sellerToken, process.env.JWT_SECRET)
 
-         const isSeller = decodedToken.email === process.env.SELLER_EMAIL;
-         const isDemoSeller = decodedToken.email === process.env.SELLER_DEMO_EMAIL;
+        const isSeller = tokenDecode.email === process.env.SELLER_EMAIL;
+        const isDemoSeller = tokenDecode.email === process.env.SELLER_DEMO_EMAIL;
 
-
-          if (isSeller || isDemoSeller) {
+        if (isSeller || isDemoSeller) {
             req.seller = {
-                email: decodedToken.email,
-                isDemoSeller: decodedToken.isDemoSeller || false
+                email: tokenDecode.email,
+                isDemoSeller: tokenDecode.isDemoSeller || false
             }
-            next()
-        } else {
+            next();
+        }
+        else {
             return res
                 .status(401)
                 .json({ success: false, message: "Nicht autorisiert" });
-
         }
     } catch (error) {
         console.log(error.stack);
-        return res.status(401).json({ success: false, message: "Nicht autorisiert" });
+        return res.status(500).json({ success: false, message: 'Interner Serverfehler' });
     }
 }
 
