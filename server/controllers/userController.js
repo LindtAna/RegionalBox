@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import validator from "validator";
 import jwt from "jsonwebtoken";
-import { generateToken } from "../utils/token.js";
 
 //User Registration : /api/user/register
 export const register = async (req, res) => {
@@ -28,22 +27,17 @@ export const register = async (req, res) => {
 
         const user = await User.create({ name, email, password: hashedPassword });
 
-        // const token = generateToken(user._id);
-        // setTokenCookie(res, token);
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
 
-        // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
-        const token = generateToken({ id: user._id });
-
-        res.cookie('token', token, {
+       res.cookie('token', token, {
             httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
         return res.status(201).json({
             success: true,
-            token,
             user: { email: user.email, name: user.name },
         });
     } catch (error) {
@@ -67,21 +61,17 @@ export const login = async (req, res) => {
             return res.status(401).json({ success: false, message: "Ungültige Anmeldedaten" });
         }
 
-        // const token = generateToken(user._id);
-        // setTokenCookie(res, token);
-
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
 
-        res.cookie('token', token, {
+       res.cookie('token', token, {
             httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
-        
-        return res.status(200).json({
+
+        return res.status(201).json({
             success: true,
-            token,
             user: { email: user.email, name: user.name },
         });
     } catch (error) {
@@ -94,10 +84,8 @@ export const login = async (req, res) => {
 
 export const isAuth = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).select("-password");
-        if (!user) {
-            return res.status(404).json({ success: false, message: "Benutzer nicht gefunden" });
-        }
+        const {userId} = req.body
+        const user = await User.findById(userId).select("-password");
         return res.status(200).json({ success: true, user });
     } catch (error) {
         console.error(error.stack);
@@ -110,11 +98,11 @@ export const isAuth = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        // res.clearCookie("token", {
-        //     httpOnly: true,
-        //     secure: true,
-        //     sameSite: "none",
-        // });
+        res.clearCookie('token',{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+        })
         return res.status(200).json({ success: true, message: 'Abgemeldet' });
 
     } catch (error) {

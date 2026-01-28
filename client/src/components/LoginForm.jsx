@@ -19,7 +19,6 @@ const LoginForm = () => {
                 { name, email, password })
 
             if (data.success) {
-                localStorage.setItem('userToken', data.token);
                 setUser(data.user)
                 setShowUserLogin(false)
                 navigate('/')

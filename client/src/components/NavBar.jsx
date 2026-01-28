@@ -12,7 +12,6 @@ const NavBar = () => {
         try {
             const { data } = await axios.get('/api/user/logout')
             if (data.success) {
-                localStorage.removeItem('userToken');
                 toast.success(data.message)
                 setUser(null);
                 navigate('/')

@@ -4,8 +4,8 @@ import User from "../models/User.js";
 
 export const updateCart = async (req, res) => {
     try {
-        const userId = req.user._id;
-        const { cartItems, actionCartItems } = req.body;
+
+        const { userId, cartItems, actionCartItems } = req.body;
 
         await User.findByIdAndUpdate(userId, { cartItems, actionCartItems });
         
