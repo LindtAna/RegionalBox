@@ -5,9 +5,14 @@ import User from "../models/User.js";
 export const updateCart = async (req, res) => {
     try {
 
-        const { userId, cartItems, actionCartItems } = req.body;
+        const userId = req.user.id;
+        const { cartItems, actionCartItems } = req.body;
 
-        await User.findByIdAndUpdate(userId, { cartItems, actionCartItems });
+        await User.findByIdAndUpdate(
+            userId,
+            { cartItems, actionCartItems },
+            { new: true }
+        );
         
         return res
             .status(200)
