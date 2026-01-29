@@ -84,8 +84,15 @@ export const login = async (req, res) => {
 
 export const isAuth = async (req, res) => {
     try {
-        const { userId } = req.body
+        const userId = req.user.id;
         const user = await User.findById(userId).select("-password");
+        if (!user) {
+          return res.status(401).json({
+            success: false,
+            message: "Nicht autorisiert"
+          })
+        }
+
         return res.status(200).json({ success: true, user });
     } catch (error) {
         console.error(error.stack);
