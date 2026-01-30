@@ -6,9 +6,9 @@ import { demoSeller } from '../middleware/demoSeller.js';
 
 const productRouter = express.Router()
 
-productRouter.post('/add', authSeller, upload.array("images"),  addProduct)
+productRouter.post('/add', authSeller, demoSeller, upload.array("images"), addProduct)
 productRouter.get('/list', productList)
-productRouter.get('/id', productById)
+productRouter.get('/:id', productById)
 productRouter.patch('/stock', authSeller, demoSeller, changeStock)
 
 

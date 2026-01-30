@@ -14,7 +14,7 @@ const SellerLogin = () => {
             const { data } = await axios.post('/api/seller/login', { email, password })
             if (data.success) {
                 setIsSeller(true)
-                setIsDemoSeller(data.IsDemoSeller)
+                setIsDemoSeller(data.isDemoSeller)
                 navigate('/seller')
             } else {
                 toast.error(data.message)

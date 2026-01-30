@@ -6,9 +6,9 @@ import { demoSeller } from '../middleware/demoSeller.js';
 
 const angebotRouter = express.Router()
 
-angebotRouter.post('/add', authSeller, upload.array("images"), addActionProduct)
+angebotRouter.post('/add', authSeller, demoSeller, upload.array("images"), addActionProduct)
 angebotRouter.get('/list', actionProductList)
-angebotRouter.get('/id', actionProductById)
+angebotRouter.get('/:id', actionProductById)
 angebotRouter.patch('/stock', authSeller, demoSeller, changeStock)
 angebotRouter.patch('/highlight', authSeller, demoSeller, changeHighlight)
 
