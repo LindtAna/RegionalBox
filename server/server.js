@@ -12,6 +12,7 @@ import cartRouter from './routes/cartRouter.js';
 import addressRouter from './routes/addressRouter.js';
 import ordersRouter from './routes/ordersRouter.js';
 import { stripeWebhooks } from './controllers/orderController.js';
+import newsletterRouter from './routes/newsletterRouter.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -19,15 +20,10 @@ const port = process.env.PORT || 4000;
 connectCloudinary();
 await connectDB()
 
-//Allow multuple origins
-// const allowedOrigins = ['http://localhost:5173','https://regional-box.vercel.app']
-
 
 app.post('/stripe', express.raw({type:'application/json'}), stripeWebhooks)
 
-//Middleware configuration
-
-// app.use(cors({origin: allowedOrigins, credentials: true}))
+//Allow multuple origins
 app.use(cors({
   origin: ['http://localhost:5173', 'https://regional-box.vercel.app'],
   credentials: true,
@@ -46,6 +42,7 @@ app.use('/api/action-product', angebotRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/address', addressRouter)
 app.use('/api/orders', ordersRouter)
+app.use('/api/newsletter', newsletterRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
