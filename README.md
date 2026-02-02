@@ -754,7 +754,7 @@ if (!user || !(await bcrypt.compare(password, user.password))) {
 return res.status(401).json({ success: false, message: "Ungültige Anmeldedaten" });}
 ```
 
-### Cookie-Konfiguration
+### Cross-Origin Cookie Configuration
 ```javascript
 {
   httpOnly: true,              // Schutz vor XSS
@@ -762,6 +762,17 @@ return res.status(401).json({ success: false, message: "Ungültige Anmeldedaten"
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // CORS-Kompatibilität
   maxAge: 7 * 24 * 60 * 60 * 1000  // 7 Tage
 }
+
+{
+  app.use(cors({
+  origin: ['http://localhost:5173', 'https://regional-box.vercel.app'],
+  credentials: true}));
+}
+
+{
+  axios.defaults.withCredentials = true;
+}
+
 ```
 
 ### Sicherheits-Features

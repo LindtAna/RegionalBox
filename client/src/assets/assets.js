@@ -1,4 +1,5 @@
 import logo from "./logo.png";
+import logo_small from "./logo_sm.png";
 import search_icon from "./icons/search_icon.svg";
 import remove_icon from "./icons/remove_icon.svg";
 import arrow_right_icon_colored from "./icons/arrow_right_icon_colored.svg";
@@ -37,6 +38,7 @@ import upload_area from "./upload_area.png";
 
 export const assets = {
   logo,
+  logo_small,
   search_icon,
   remove_icon,
   arrow_right_icon_colored,

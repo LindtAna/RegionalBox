@@ -49,7 +49,7 @@ const ActionProductsList = () => {
                 <h2 className="pb-4 text-lg font-medium">Alle Angebote</h2>
                 <div className="flex flex-col items-center max-w-4xl w-full overflow-hidden rounded-md bg-white border border-dark-green/40">
                     <table className="md:table-auto table-fixed w-full overflow-hidden">
-                        <thead className="text-dark-green text-sm text-left">
+                        <thead className="text-dark-green max-[500px]:text-xs md:text-base text-left">
                             <tr>
                                 <th className="px-4 py-3 font-semibold truncate">Produktname</th>
                                 <th className="px-4 py-3 font-semibold truncate hidden md:block">Kategorie</th>
@@ -69,10 +69,11 @@ const ActionProductsList = () => {
                                         <span className="truncate max-sm:hidden w-full">{product.name}</span>
                                     </td>
                                     <td className="px-4 py-3 max-sm:hidden">{product.category}</td>
-                                    <td className="px-4 py-3">{currency}{product.price}</td>
-                                    <td className="px-4 py-3">{currency}{product.offerPrice || '0'}</td>
+                                    <td className="px-4 py-3 max-[500px]:text-xs">{currency}{product.price}</td>
+                                    <td className="px-4 py-3 max-[500px]:text-xs">{currency}{product.offerPrice || '0'}</td>
 
                                     <td className="px-4 py-3">
+                                        <div className="scale-[0.65] sm:scale-90 md:scale-100 origin-left">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                                             <input
                                                 onChange={() => toggleHighlight(product._id, product.highlight)}
@@ -85,9 +86,11 @@ const ActionProductsList = () => {
                                             <span className="dot absolute left-1 top-1 w-5 h-5 bg-white border border-dark-green/40 rounded-full transition-transform
                                             duration-200 ease-in-out peer-checked:translate-x-5"></span>
                                         </label>
+                                        </div>
                                     </td>
 
-                                    <td className="px-4 py-3">
+                                    <td className="py-3 pl-2 pr-4 sm:pl-3 sm:pr-4 md:px-4">
+                                        <div className="scale-[0.65] sm:scale-90 md:scale-100 origin-left">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                                             <input
                                                 onChange={() => toggleStock(product._id, !product.inStock)}
@@ -99,6 +102,7 @@ const ActionProductsList = () => {
                                             border border-dark-green/40 rounded-full transition-transform
                                             duration-200 ease-in-out peer-checked:translate-x-5"></span>
                                         </label>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

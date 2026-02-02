@@ -30,13 +30,21 @@ const SellerLayout = () => {
 
     return (
         <>
-            <div className="flex items-center justify-between px-4 md:px-8
+            <div className="flex items-center gap-2 justify-between px-4 md:px-8
              border-b border-dark-green/30 py-3 bg-white">
                 <Link to='/'>
-                    <img src={assets.logo} alt="Regional Box Logo"
-                        className="w-34 md:w-38 cursor-pointer" />
-                </Link>
-                <div className="flex items-center gap-2 text-primary">
+        <img 
+            src={assets.logo_small}
+            alt="Regional Box Logo"
+            className="w-12 md:w-34 lg:w-38 cursor-pointer md:hidden"
+        />
+        <img 
+            src={assets.logo}
+            alt="Regional Box Logo"
+            className="w-34 md:w-38 cursor-pointer hidden md:block"
+        />
+    </Link>
+                <div className="flex items-center gap-2 text-primary text-sm sm:text-primary md:text-lg">
                     <p>Hallo {isDemoSeller ? 'Demo-Boss' : 'Boss'}!</p> 
                     <button onClick={logout} className='border bg-primary hover:bg-dark-green rounded-full text-base text-white sm:mx-5 px-5 py-1'>Logout</button>
                 </div>

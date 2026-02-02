@@ -26,7 +26,7 @@ const ProductsList = () => {
                 <h2 className="pb-4 text-lg font-medium">Alle Produkte</h2>
                 <div className="flex flex-col items-center max-w-4xl w-full overflow-hidden rounded-md bg-white border border-dark-green/40">
                     <table className="md:table-auto table-fixed w-full overflow-hidden">
-                        <thead className="text-dark-green text-sm text-left">
+                        <thead className="text-dark-green max-[500px]:text-xs md:text-base text-left">
                             <tr>
                                 <th className="px-4 py-3 font-semibold truncate">Produktname</th>
                                 <th className="px-4 py-3 font-semibold truncate hidden md:block">Kategorie</th>
