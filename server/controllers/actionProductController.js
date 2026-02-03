@@ -63,7 +63,7 @@ export const actionProductById = async (req, res) => {
   }
 };
 
-// Change product inStock : api/action-product/stock
+// Change product inStock(Seller Dashboard): api/action-product/stock
 
 export const changeStock = async (req, res) => {
      try{
@@ -79,7 +79,7 @@ export const changeStock = async (req, res) => {
     }
 }
 
-
+// Change Highichts(Seller Dashboard) : api/action-product/highlight
 export const changeHighlight = async (req, res) => {
   try {
     const { id, highlight } = req.body;

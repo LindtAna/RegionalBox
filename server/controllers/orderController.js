@@ -41,7 +41,7 @@ export const placeOrderCOD = async (req, res) => {
 
   } catch (error) {
     console.log(error.stack);
-    return res.status(500).json({ success: false, message: 'Interner Serverfehler' });
+    return res.status(500).json({ success: false, message: 'placeOrderCOD fehler' });
   }
 }
 

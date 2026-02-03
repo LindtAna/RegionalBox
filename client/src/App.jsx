@@ -19,9 +19,13 @@ import { AddProduct } from './pages/seller/AddProduct'
 import ProductsList from './pages/seller/ProductsList'
 import ActionProductList from './pages/seller/ActionProductList'
 import OrdersList from './pages/seller/OrdersList'
+import NewsletterList from './pages/seller/NewsletterList'
 import Loading from './components/Loading'
+
+
 const App = () => {
 
+  NewsletterList
   const isSellerPath = useLocation().pathname.includes('seller');
   const {showUserLogin, isSeller} = useAppContext()
 
@@ -49,6 +53,7 @@ const App = () => {
             <Route path='products-list' element={<ProductsList />}/>
             <Route path='angebote-list' element={<ActionProductList />}/>
             <Route path='orders-list' element={<OrdersList/>}/>
+            <Route path='newsletter-list' element={<NewsletterList/>}/>
             </Route>
           </Routes>
         </div>

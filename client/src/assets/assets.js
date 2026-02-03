@@ -9,6 +9,7 @@ import add_icon from "./icons/add_icon.svg";
 import refresh_icon from "./icons/refresh_icon.svg";
 import product_list_icon from "./icons/product_list_icon.svg";
 import order_icon from "./icons/order_icon.svg";
+import newsletter_icon from "./icons/newsletter_icon.png";
 import profile_icon from "./icons/profile_icon.png";
 import menu_icon from "./icons/menu_icon.svg";
 import box_icon from "./icons/box_icon.png";
@@ -48,6 +49,7 @@ export const assets = {
   refresh_icon,
   product_list_icon,
   order_icon,
+  newsletter_icon,
   upload_area,
   profile_icon,
   menu_icon,
