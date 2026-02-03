@@ -7,6 +7,7 @@ const OrdersList = () => {
     
   const {currency, axios} = useAppContext()
   const [ordersList, setOrdersList] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchOrdersList = async () => {
     try {
@@ -17,14 +18,23 @@ const OrdersList = () => {
             } else { toast.error(data.message) }
         } catch (error) {
             toast.error(error.message)
-        }
+        } finally {
+      setIsLoading(false); 
+    }
   }
 
   useEffect(() => {
     fetchOrdersList()
-  }, [])
+}, [])
+
+
      return (
     <div className="flex-1 h-[95vh] overflow-y-scroll no-scrollbar">
+  {isLoading ? (
+        <div className="flex justify-center items-center h-full">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-dark-green"></div>
+        </div>
+      ) : (
       <div className="md:p-10 p-4 space-y-4">
         <h2 className="text-lg font-medium">Bestellungen</h2>
 
@@ -87,6 +97,7 @@ const OrdersList = () => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };

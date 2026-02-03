@@ -37,7 +37,6 @@ export const addEmail = async (req, res) => {
 }
 
 // Eine Liste der E-Mail-Adressen abrufen: /api/newsletter/list
-// get all orders for Seller/admin : /api/seller/newsletter-list
 export const getEmails = async (req, res) => {
     try {
         const emails = await Newsletter.find({})
@@ -46,7 +45,7 @@ export const getEmails = async (req, res) => {
             .json({ success: true, emails});
     } catch (error) {
         console.log(error.stack);
-        return res.status(500).json({ success: false, message: 'getEmails fehler' })
+        return res.status(500).json({ success: false, message: 'Interner Serverfehler' })
     }
 }
 
@@ -55,7 +54,7 @@ export const toggleActive = async (req, res) => {
     try {
         const newsletter = await Newsletter.findById(id);
         if (!newsletter) {
-            return res.status(404).json({ success: false, message: 'toggleActive fehler' });
+            return res.status(404).json({ success: false, message: 'Interner Serverfehler' });
         }
         newsletter.active = !newsletter.active;
         await newsletter.save();
