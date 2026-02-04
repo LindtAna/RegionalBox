@@ -8,6 +8,7 @@ const Hero = () => {
             {/* video banner */}
             <video
                 src={assets.banner_video}
+                poster={assets.banner_poster}
                 autoPlay
                 loop
                 muted
@@ -18,6 +19,7 @@ const Hero = () => {
             {/* video banner mobile*/}
             <video
                 src={assets.banner_video_sm}
+                poster={assets.banner_poster_sm}
                 autoPlay
                 loop
                 muted

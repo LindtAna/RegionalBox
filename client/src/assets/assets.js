@@ -33,7 +33,10 @@ import add_address_image from "./add_address_image.svg";
 
 
 import banner_video from "./banner.mp4";
+import banner_poster from "./hero_banner.png";
 import banner_video_sm from "./banner_sm.mp4";
+import banner_poster_sm from "./hero_banner_sm.png";
+
 
 import upload_area from "./upload_area.png";
 
@@ -73,4 +76,6 @@ export const assets = {
 
   banner_video,
   banner_video_sm,
+  banner_poster_sm,
+  banner_poster,
 };
