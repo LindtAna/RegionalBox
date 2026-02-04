@@ -34,6 +34,7 @@ Eine Full-Stack E-Commerce-Plattform für die Lieferung regionaler Lebensmittel 
 -  Mehrere Zahlungsoptionen (Nachnahme & Stripe)
 -  Benutzer-Authentifizierung mit JWT
 -  Admin-Dashboard für Verkäufer
+-  Newsletter-System mit E-Mail-Verwaltung
 -  Vollständig responsives Design
 
 **Live Demo:** [https://regional-box.vercel.app](https://regional-box.vercel.app)
@@ -52,6 +53,8 @@ Eine Full-Stack E-Commerce-Plattform für die Lieferung regionaler Lebensmittel 
 -  **Zahlungsoptionen**:
   - Bargeld bei Lieferung (COD)
   - Online-Zahlung via Stripe
+  -  **Newsletter-Abonnement** - Anmeldung für Angebote und Neuheiten
+ 
 
 ### Für Verkäufer
 
@@ -62,6 +65,8 @@ Eine Full-Stack E-Commerce-Plattform für die Lieferung regionaler Lebensmittel 
 -  **Lagerverwaltung** - Produkte auf "In Stock" / "Out of Stock" setzen
 -  **Highlight-Funktion** - Produkte auf der Homepage hervorheben
 -  **Bestellungsübersicht** - Alle Bestellungen einsehen und verwalten
+-  **Newsletter-Verwaltung** - E-Mail-Abonnenten verwalten und exportieren
+-  **CSV-Export** - Export von Newsletter-Abonnenten für externe E-Mail-Marketing-Tools
 -  **Demo-Modus** - Verkäufer-Dashboard ohne Schreibrechte testen
 
 ### UI/UX
@@ -100,6 +105,8 @@ Eine Full-Stack E-Commerce-Plattform für die Lieferung regionaler Lebensmittel 
 | Cloudinary | 2.8.0 | Bild-Hosting |
 | Stripe | 19.1.0 | Zahlungsabwicklung |
 | Multer | 2.0.2 | Datei-Uploads |
+| Validator | 13.15.20 | E-Mail-Validierung |
+
 
 ### DevOps
 
@@ -146,6 +153,7 @@ RegionalBox/
 │   │   │   ├── 📁 seller/           # Verkäufer-Dashboard
 │   │   │   │   ├── ActionProductList.jsx
 │   │   │   │   ├── AddProduct.jsx
+│   │   │   │   ├── NewsletterList.jsx
 │   │   │   │   ├── OrdersList.jsx
 │   │   │   │   ├── ProductsList.jsx
 │   │   │   │   └── SellerLayout.jsx
@@ -181,6 +189,7 @@ RegionalBox/
 │   │   ├── cartController.js
 │   │   ├── orderController.js
 │   │   ├── productController.js
+│   │   ├── newsLetterController.js
 │   │   ├── sellerController.js
 │   │   ├── userAddressController.js
 │   │   └── userController.js
@@ -194,6 +203,7 @@ RegionalBox/
 │   │   ├── Angebot.js               # Angebots-Produkt
 │   │   ├── Order.js                 # Bestellung
 │   │   ├── Product.js               # Produkt
+│   │   ├── Newsletter.js            # Newsletter
 │   │   ├── User.js                  # Benutzer
 │   │   └── UserAddress.js           # Adresse
 │   │
@@ -203,6 +213,7 @@ RegionalBox/
 │   │   ├── cartRouter.js
 │   │   ├── ordersRouter.js
 │   │   ├── productRouter.js
+│   │   ├── newsletterRouter.js
 │   │   ├── sellerRouter.js
 │   │   └── userRouter.js
 │   │
@@ -244,22 +255,22 @@ RegionalBox/
 ### Backend (`/server/.env`)
 ```env
 # MongoDB
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/regionalbox
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/name
 
 # JWT Secret
-JWT_SECRET=ihr_sehr_sehr_geheimes_jwt_secret_password_hier
+JWT_SECRET=sehr_sehr_geheimes_jwt_secret_password_hier
 
 # Cloudinary
-CLOUDINARY_CLOUD_NAME=ihr_cloud_name
-CLOUDINARY_API_KEY=ihr_api_key
-CLOUDINARY_API_SECRET=ihr_api_secret
+CLOUDINARY_CLOUD_NAME=cloud_name
+CLOUDINARY_API_KEY=api_key
+CLOUDINARY_API_SECRET=api_secret
 
 # Stripe
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 
 # Verkäufer-Credentials
-SELLER_EMAIL=secretname@regionalbox.de
+SELLER_EMAIL=sellername@regionalbox.de
 SELLER_PASSWORD=sellers_sicheres_admin_passwort
 SELLER_DEMO_EMAIL=admin-demo@regionalbox.de
 SELLER_DEMO_PASSWORD=demo_password_hier
@@ -559,7 +570,6 @@ Content-Type: application/json
   "isDemoSeller": false
 }
 ```
-
 #### Verkäufer-Auth prüfen
 ```http
 GET /api/seller/is-auth
@@ -572,6 +582,74 @@ GET /api/seller/logout
 Cookie: sellerToken=jwt_token_here
 ```
 
+###  Newsletter Endpoints
+#### Newsletter-Abonnement hinzufügen
+```http
+POST /api/newsletter/add
+Content-Type: application/json
+{
+  "email": "kunde@example.com"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Erfolgreich angemeldet",
+  "email": "kunde@example.com"
+}
+```
+
+**Fehler-Antworten:**
+```json
+{
+  "success": false,
+  "message": "Diese E-Mail ist schon angemeldet"
+}
+```
+
+#### Alle Newsletter-Abonnenten abrufen (Verkäufer)
+
+```http
+GET /api/newsletter/list
+Cookie: sellerToken=jwt_token_here
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "emails": [
+    {
+      "_id": "65f1a2b3...",
+      "email": "kunde1@example.com",
+      "active": true,
+      "createdAt": "2024-01-15T10:30:00.000Z"
+    },
+    {
+      "_id": "65f1a2b4...",
+      "email": "kunde2@example.com",
+      "active": false,
+      "createdAt": "2024-01-16T14:20:00.000Z"
+    }
+  ]
+}
+```
+
+#### Newsletter-Abonnenten als CSV herunterladen (Verkäufer)
+
+```http
+GET /api/newsletter/download
+Cookie: sellerToken=jwt_token_here
+```
+
+**Response:**
+```csv
+Email,CreatedAt
+kunde1@example.com,2024-01-15T10:30:00.000Z
+kunde2@example.com,2024-01-16T14:20:00.000Z
+```
 ---
 
 ## Datenbank-Schema
@@ -655,6 +733,20 @@ Die Struktur ähnelt der von Produkt. Unterschiede:
 }
 ```
 
+###  Newsletter Collection
+```javascript
+{
+  _id: ObjectId,
+  email: String,             // Unique Email
+  active: Boolean,           // Für CSV-Export aktiv/inaktiv
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+Schema-Validierung:
+ - email: Required, unique, trim, Regex-Validierung für E-Mail-Format
+ - active: Default true, steuert ob E-Mail im CSV-Export enthalten ist
+
 ---
 
 ##  Architektur
@@ -688,6 +780,7 @@ Die Struktur ähnelt der von Produkt. Unterschiede:
 │  │ - /cart   │     │ - register│  │- demoSeller │     │
 │  │ - /order  │     │ sellerCtrl│  │             │     │
 │  │ - /seller │     │ - login   │  │             │     │
+│  │   ...     │     │    ...    │  │             │     │
 │  └───────────┘     └───────────┘  └─────────────┘     │
 │                        │                              │
 │                        ▼                              │
@@ -704,6 +797,7 @@ Die Struktur ähnelt der von Produkt. Unterschiede:
 │  - angebots (Angebots-Produkte)                       │
 │  - addresses (Lieferadressen)                         │
 │  - orders (Bestellungen)                              │
+│  - newsletters (Newsletter-Abonnenten)                │
 └───────────────────────────────────────────────────────┘
 
 External Services:
@@ -780,9 +874,11 @@ return res.status(401).json({ success: false, message: "Ungültige Anmeldedaten"
 -  **XSS-Schutz** durch HttpOnly-Cookies
 -  **SQL/NoSQL-Injection-Schutz** durch Mongoose
 -  **CORS** nur für bekannte Origins
--  **Input-Validierung** mit validator.js
+-  **Input-Validierung** mit validator.js (E-Mail-Format, Duplicate-Check)
 -  **Rate-Limiting** für API-Endpunkte (TODO)
 -  **Passwort-Hashing** mit bcrypt (10 Salt-Rounds)
+-  **E-Mail-Normalisierung** (trim, toLowerCase)
+-  **Demo-Modus-Schutz** verhindert Daten-Manipulation im Dashboard
 
 ---
 
@@ -861,7 +957,7 @@ Das UI-Design basiert auf dem folgenden Figma-Template:
 ##  Roadmap
 ### Geplante Features
 
-- **Newsletter-Backend** - E-Mail-Versand implementieren
+- ~~Newsletter-Backend - E-Mail-Versand implementieren~~
 - **Favoriten** - Wunschliste für Benutzer
 - **Advanced Search** - Filter nach Preis, Kategorie, etc.
 - **Benachrichtigungen** - E-Mail-Bestätigungen für Bestellungen
